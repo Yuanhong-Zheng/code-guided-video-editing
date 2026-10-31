@@ -22,8 +22,8 @@ adds the edited proxy for steps 1–5. These are selected qualitative examples,
 not an aggregate benchmark evaluation.
 
 The method section precedes the results gallery and displays Figure 2 from the paper as a 3000-pixel-wide,
-lossless WebP export. Both the image and its caption link to the original
-vector PDF for full-resolution viewing. The header provides an EN / 中文 switch,
+lossless WebP export, blended into the page background without a card or
+caption. Clicking the figure opens the original vector PDF for full-resolution viewing. The header provides an EN / 中文 switch,
 with English at `index.html` and Chinese at `zh.html`. Switching preserves the
 current anchor. Both editions share the same video and figure assets.
 
