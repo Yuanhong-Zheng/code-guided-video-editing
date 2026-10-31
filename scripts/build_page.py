@@ -57,15 +57,20 @@ def main() -> None:
     sections = []
     for i, category in enumerate(content["categories"], 1):
         cards = "\n".join(card(case, media["cases"][case["id"]]) for case in category["cases"])
+        if not cards:
+            cards = f'<div class="empty-showcase">{escape(category.get("empty_message", "Showcases to be added."))}</div>'
         sections.append(f'''<section class="task-section container" id="{category['id']}" aria-labelledby="task-{category['id']}">
           <div class="task-heading"><span class="task-number" aria-hidden="true">{i:02}</span><div><h2 id="task-{category['id']}">{escape(category['title'])}</h2><p>{escape(category['description'])}</p></div></div>
           {cards}
         </section>''')
     template = (ROOT / "index.template.html").read_text()
     assert template.count("{{SHOWCASES}}") == 1
-    paper_version = sha256((DIST / "assets/paper.pdf").read_bytes()).hexdigest()[:12]
     html = template.replace("{{SHOWCASES}}", "\n".join(sections))
-    html = html.replace('href="assets/paper.pdf"', f'href="assets/paper.pdf?v={paper_version}"')
+    html = html.replace("{{CASE_COUNT}}", str(sum(len(c["cases"]) for c in content["categories"])))
+    html = html.replace("{{CATEGORY_COUNT}}", str(len(content["categories"])))
+    for name, attribute in [("assets/paper.pdf", "href"), ("styles.css", "href"), ("app.js", "src")]:
+        version = sha256((DIST / name).read_bytes()).hexdigest()[:12]
+        html = html.replace(f'{attribute}="{name}"', f'{attribute}="{name}?v={version}"')
     (DIST / "index.html").write_text(html)
     print(f"Built {len(sections)} task sections, {sum(len(c['cases']) for c in content['categories'])} complete comparisons.")
 

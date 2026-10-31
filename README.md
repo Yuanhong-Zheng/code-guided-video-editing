@@ -6,10 +6,13 @@ Yuanhong Zheng · Peking University
 
 [Project page](https://yuanhong-zheng.github.io/code-guided-video-editing/) · [Paper](https://yuanhong-zheng.github.io/code-guided-video-editing/assets/paper.pdf)
 
-The research page presents 16 selected examples across eight OpenVE-Bench
+The research page organizes selected comparisons into eight OpenVE-Bench
 editing categories. Each example shows the source video, executable proxy,
 matched H3 output without a proxy, and output with early-step proxy guidance.
-All examples are expanded on one page. Nearby comparisons load and play
+Cases are selected for a visible failure without a proxy and a clear
+improvement with proxy guidance, following direct inspection of both outputs.
+Each category has at most two examples; unfilled categories remain empty.
+All selected examples are expanded on one page. Nearby comparisons load and play
 automatically; distant video decoders are released. Playback is muted and loops,
 with synchronized pause, restart, and scrubbing for each group of four.
 
@@ -30,7 +33,7 @@ python3 scripts/check_site.py
 python3 scripts/serve.py
 ```
 
-Open `http://localhost:8000`. The build writes all 16 case cards directly into
+Open `http://localhost:8000`. The build writes all selected case cards directly into
 `dist/index.html`; JavaScript is only used for playback and clipboard behavior.
 Pushes to `main` deploy `dist/` through the GitHub Pages workflow.
 

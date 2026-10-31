@@ -21,16 +21,6 @@ import subprocess
 import tempfile
 
 
-CASE_GROUPS = {
-    "camera_edit": ["0350", "0355"],
-    "local_add": ["0292", "0246"],
-    "local_change": ["0089", "0111"],
-    "local_remove": ["0211", "0189"],
-    "background_change": ["0166", "0156"],
-    "creative_edit": ["0318", "0332"],
-    "global_style": ["0041", "0055"],
-    "subtitle_edit": ["0405", "0395"],
-}
 ROLES = ["source", "proxy", "without-proxy", "with-proxy"]
 BRANCHES = {
     "without-proxy": "source_plus_prompt",
@@ -253,6 +243,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-site", type=Path, required=True)
     parser.add_argument("--experiment-root", type=Path, required=True)
+    parser.add_argument("--selection", type=Path,
+                        default=Path(__file__).resolve().parents[1] / "content.json")
     parser.add_argument("--output-dir", type=Path, default=Path(__file__).resolve().parents[1] / "dist")
     parser.add_argument("--report-dir", type=Path,
                         default=Path(__file__).resolve().parents[2] / ".code-guided-prep" / "media")
@@ -274,6 +266,13 @@ def main() -> None:
                 "Source data is not the selected early-step run")
         require(data["method"]["early_step"] is True, "Source collection is not early-step")
         cases = {case["id"]: case for case in data["cases"]}
+        selection = json.loads(args.selection.read_text())
+        case_groups = {category["id"]: [case["id"] for case in category["cases"]]
+                       for category in selection["categories"]}
+        require(len(case_groups) == 8, "Expected all eight task categories")
+        require(all(len(ids) <= 2 for ids in case_groups.values()), "At most two reviewed cases per task")
+        selected_ids = [cid for ids in case_groups.values() for cid in ids]
+        require(bool(selected_ids) and len(selected_ids) == len(set(selected_ids)), "Empty or duplicate selection")
         tasks = []
         manifest = {"experiment": EXPERIMENT, "cases": {}}
         provenance = {"schema_version": 1, "experiment": EXPERIMENT,
@@ -283,7 +282,7 @@ def main() -> None:
                                       "all_streams_mapped": True,
                                       "poster_policy": "One JPEG near 30% of each case; same case timestamp for all four tracks"},
                       "cases": {}}
-        for category, case_ids in CASE_GROUPS.items():
+        for category, case_ids in case_groups.items():
             for case_id in case_ids:
                 case = cases[case_id]
                 require(case["category"] == category, f"{case_id}: category mismatch")

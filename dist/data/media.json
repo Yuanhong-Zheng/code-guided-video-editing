@@ -59,32 +59,6 @@
         }
       ]
     },
-    "0292": {
-      "duration": 3.0416666666666665,
-      "frames": 73,
-      "media": [
-        {
-          "role": "source",
-          "src": "assets/cases/0292/source.mp4",
-          "poster": "assets/cases/0292/source.jpg"
-        },
-        {
-          "role": "proxy",
-          "src": "assets/cases/0292/proxy.mp4",
-          "poster": "assets/cases/0292/proxy.jpg"
-        },
-        {
-          "role": "without-proxy",
-          "src": "assets/cases/0292/without-proxy.mp4",
-          "poster": "assets/cases/0292/without-proxy.jpg"
-        },
-        {
-          "role": "with-proxy",
-          "src": "assets/cases/0292/with-proxy.mp4",
-          "poster": "assets/cases/0292/with-proxy.jpg"
-        }
-      ]
-    },
     "0246": {
       "duration": 3.2083333333333335,
       "frames": 77,
@@ -111,55 +85,81 @@
         }
       ]
     },
-    "0089": {
-      "duration": 3.5416666666666665,
-      "frames": 85,
+    "0294": {
+      "duration": 3.0833333333333335,
+      "frames": 74,
       "media": [
         {
           "role": "source",
-          "src": "assets/cases/0089/source.mp4",
-          "poster": "assets/cases/0089/source.jpg"
+          "src": "assets/cases/0294/source.mp4",
+          "poster": "assets/cases/0294/source.jpg"
         },
         {
           "role": "proxy",
-          "src": "assets/cases/0089/proxy.mp4",
-          "poster": "assets/cases/0089/proxy.jpg"
+          "src": "assets/cases/0294/proxy.mp4",
+          "poster": "assets/cases/0294/proxy.jpg"
         },
         {
           "role": "without-proxy",
-          "src": "assets/cases/0089/without-proxy.mp4",
-          "poster": "assets/cases/0089/without-proxy.jpg"
+          "src": "assets/cases/0294/without-proxy.mp4",
+          "poster": "assets/cases/0294/without-proxy.jpg"
         },
         {
           "role": "with-proxy",
-          "src": "assets/cases/0089/with-proxy.mp4",
-          "poster": "assets/cases/0089/with-proxy.jpg"
+          "src": "assets/cases/0294/with-proxy.mp4",
+          "poster": "assets/cases/0294/with-proxy.jpg"
         }
       ]
     },
-    "0111": {
-      "duration": 4.208333333333333,
-      "frames": 101,
+    "0068": {
+      "duration": 3.5,
+      "frames": 84,
       "media": [
         {
           "role": "source",
-          "src": "assets/cases/0111/source.mp4",
-          "poster": "assets/cases/0111/source.jpg"
+          "src": "assets/cases/0068/source.mp4",
+          "poster": "assets/cases/0068/source.jpg"
         },
         {
           "role": "proxy",
-          "src": "assets/cases/0111/proxy.mp4",
-          "poster": "assets/cases/0111/proxy.jpg"
+          "src": "assets/cases/0068/proxy.mp4",
+          "poster": "assets/cases/0068/proxy.jpg"
         },
         {
           "role": "without-proxy",
-          "src": "assets/cases/0111/without-proxy.mp4",
-          "poster": "assets/cases/0111/without-proxy.jpg"
+          "src": "assets/cases/0068/without-proxy.mp4",
+          "poster": "assets/cases/0068/without-proxy.jpg"
         },
         {
           "role": "with-proxy",
-          "src": "assets/cases/0111/with-proxy.mp4",
-          "poster": "assets/cases/0111/with-proxy.jpg"
+          "src": "assets/cases/0068/with-proxy.mp4",
+          "poster": "assets/cases/0068/with-proxy.jpg"
+        }
+      ]
+    },
+    "0063": {
+      "duration": 2.5833333333333335,
+      "frames": 62,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0063/source.mp4",
+          "poster": "assets/cases/0063/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0063/proxy.mp4",
+          "poster": "assets/cases/0063/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0063/without-proxy.mp4",
+          "poster": "assets/cases/0063/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0063/with-proxy.mp4",
+          "poster": "assets/cases/0063/with-proxy.jpg"
         }
       ]
     },
@@ -189,32 +189,6 @@
         }
       ]
     },
-    "0189": {
-      "duration": 4.833333333333333,
-      "frames": 116,
-      "media": [
-        {
-          "role": "source",
-          "src": "assets/cases/0189/source.mp4",
-          "poster": "assets/cases/0189/source.jpg"
-        },
-        {
-          "role": "proxy",
-          "src": "assets/cases/0189/proxy.mp4",
-          "poster": "assets/cases/0189/proxy.jpg"
-        },
-        {
-          "role": "without-proxy",
-          "src": "assets/cases/0189/without-proxy.mp4",
-          "poster": "assets/cases/0189/without-proxy.jpg"
-        },
-        {
-          "role": "with-proxy",
-          "src": "assets/cases/0189/with-proxy.mp4",
-          "poster": "assets/cases/0189/with-proxy.jpg"
-        }
-      ]
-    },
     "0166": {
       "duration": 3.0833333333333335,
       "frames": 74,
@@ -238,84 +212,6 @@
           "role": "with-proxy",
           "src": "assets/cases/0166/with-proxy.mp4",
           "poster": "assets/cases/0166/with-proxy.jpg"
-        }
-      ]
-    },
-    "0156": {
-      "duration": 2.8333333333333335,
-      "frames": 68,
-      "media": [
-        {
-          "role": "source",
-          "src": "assets/cases/0156/source.mp4",
-          "poster": "assets/cases/0156/source.jpg"
-        },
-        {
-          "role": "proxy",
-          "src": "assets/cases/0156/proxy.mp4",
-          "poster": "assets/cases/0156/proxy.jpg"
-        },
-        {
-          "role": "without-proxy",
-          "src": "assets/cases/0156/without-proxy.mp4",
-          "poster": "assets/cases/0156/without-proxy.jpg"
-        },
-        {
-          "role": "with-proxy",
-          "src": "assets/cases/0156/with-proxy.mp4",
-          "poster": "assets/cases/0156/with-proxy.jpg"
-        }
-      ]
-    },
-    "0318": {
-      "duration": 5.041666666666667,
-      "frames": 121,
-      "media": [
-        {
-          "role": "source",
-          "src": "assets/cases/0318/source.mp4",
-          "poster": "assets/cases/0318/source.jpg"
-        },
-        {
-          "role": "proxy",
-          "src": "assets/cases/0318/proxy.mp4",
-          "poster": "assets/cases/0318/proxy.jpg"
-        },
-        {
-          "role": "without-proxy",
-          "src": "assets/cases/0318/without-proxy.mp4",
-          "poster": "assets/cases/0318/without-proxy.jpg"
-        },
-        {
-          "role": "with-proxy",
-          "src": "assets/cases/0318/with-proxy.mp4",
-          "poster": "assets/cases/0318/with-proxy.jpg"
-        }
-      ]
-    },
-    "0332": {
-      "duration": 5.041666666666667,
-      "frames": 121,
-      "media": [
-        {
-          "role": "source",
-          "src": "assets/cases/0332/source.mp4",
-          "poster": "assets/cases/0332/source.jpg"
-        },
-        {
-          "role": "proxy",
-          "src": "assets/cases/0332/proxy.mp4",
-          "poster": "assets/cases/0332/proxy.jpg"
-        },
-        {
-          "role": "without-proxy",
-          "src": "assets/cases/0332/without-proxy.mp4",
-          "poster": "assets/cases/0332/without-proxy.jpg"
-        },
-        {
-          "role": "with-proxy",
-          "src": "assets/cases/0332/with-proxy.mp4",
-          "poster": "assets/cases/0332/with-proxy.jpg"
         }
       ]
     },

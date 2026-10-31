@@ -37,15 +37,20 @@ def main():
     cases = [case for category in categories for case in category["cases"]]
     ids = [attrs["id"] for _, attrs in page.elements if "id" in attrs]
     require(len(ids) == len(set(ids)), "Duplicate HTML IDs")
-    require(len(categories) == 8 and len(cases) == 16, "Expected eight tasks and sixteen cases")
+    require(len(categories) == 8 and 0 < len(cases) <= 16, "Expected eight tasks and up to sixteen reviewed cases")
+    require(len({case["id"] for case in cases}) == len(cases), "Duplicate selected cases")
     require(set(media["cases"]) == {case["id"] for case in cases}, "Media case mismatch")
     for category in categories:
-        require(len(category["cases"]) == 2, "Expected two cases per task")
+        require(len(category["cases"]) <= 2, "At most two reviewed cases per task")
         require(category["id"] in ids, "Task section is missing")
         for case in category["cases"]:
             require(f"case-{case['id']}" in ids, "Expanded case is missing")
     videos = [attrs for tag, attrs in page.elements if tag == "video"]
-    require(len(videos) == 64, "Expected four video elements per case")
+    require(len(videos) == 4 * len(cases), "Expected four video elements per case")
+    expected_videos = {item["src"] for case in media["cases"].values() for item in case["media"]}
+    actual_videos = {path.relative_to(DIST).as_posix() for path in (DIST / "assets/cases").rglob("*.mp4")}
+    require(actual_videos == expected_videos, "Unselected or missing published video files")
+    require(set(provenance["cases"]) == set(media["cases"]), "Provenance selection mismatch")
     for attrs in videos:
         require("src" not in attrs, "Video eagerly acquires a source")
         require(all(key in attrs for key in ["muted", "playsinline", "loop", "data-src"]), "Playback attributes missing")
@@ -86,7 +91,7 @@ def main():
             text = path.read_text()
             require(not any(re.search(pattern, text) for pattern in private_patterns), f"Private data in {path.relative_to(DIST)}")
     size = sum(path.stat().st_size for path in DIST.rglob("*") if path.is_file())
-    print(json.dumps({"categories": 8, "cases": 16, "videos": 64, "verified_media": True, "published_bytes": size, "all_cases_expanded": True}, indent=2))
+    print(json.dumps({"categories": 8, "cases": len(cases), "videos": len(videos), "empty_categories": [c["id"] for c in categories if not c["cases"]], "verified_media": True, "published_bytes": size, "all_cases_expanded": True}, indent=2))
 
 
 if __name__ == "__main__":

@@ -10,8 +10,18 @@
       "title": "Camera editing",
       "description": "Make the target composition visible before the final video is synthesized.",
       "cases": [
-        {"id": "0350", "title": "A wider view of the clock tower", "edit": "Reframe the clock tower as a wide shot.", "observation": "Without a proxy, the framing stays close to the source. The guided result reveals more of the surrounding scene."},
-        {"id": "0355", "title": "More sea around the sailboat", "edit": "Widen the view while retaining the sailboat.", "observation": "The executable camera plan establishes the wider composition; the source remains the visual reference."}
+        {
+          "id": "0350",
+          "title": "A wider view of the clock tower",
+          "edit": "Reframe the clock tower as a wide shot.",
+          "observation": "Without a proxy, the framing stays close to the source. The guided result reveals more of the surrounding scene."
+        },
+        {
+          "id": "0355",
+          "title": "More sea around the sailboat",
+          "edit": "Widen the view while retaining the sailboat.",
+          "observation": "The no-proxy result keeps the close framing and cropped sails. The guided result reveals the full sailboat and more surrounding sea."
+        }
       ]
     },
     {
@@ -19,8 +29,18 @@
       "title": "Object addition",
       "description": "Give new objects a concrete location, scale, and behavior in the existing shot.",
       "cases": [
-        {"id": "0292", "title": "A wall clock, placed in context", "edit": "Add a wall clock to the person's left.", "observation": "The no-proxy clock is oversized. Proxy guidance follows the planned placement and scale more closely."},
-        {"id": "0246", "title": "A seagull above the coast", "edit": "Add a flying seagull in the upper-left sky.", "observation": "The guided bird stays closer to the proxy's intended location and scale, instead of dominating the foreground."}
+        {
+          "id": "0246",
+          "title": "A seagull without losing the sailboat",
+          "edit": "Add a flying seagull in the upper-left sky.",
+          "observation": "The baseline adds the bird but removes the original sailboat. Proxy guidance adds the seagull while retaining the boat and rocky coast."
+        },
+        {
+          "id": "0294",
+          "title": "A seagull on the sunset beach",
+          "edit": "Add a standing seagull near the shoreline.",
+          "observation": "Without a proxy, the wide beach scene becomes a close-up of the bird. The guided result adds a seagull on the sand while retaining the sunset and wide composition."
+        }
       ]
     },
     {
@@ -28,8 +48,18 @@
       "title": "Local modification",
       "description": "Specify the intended change while giving the rest of the scene a persistent reference.",
       "cases": [
-        {"id": "0089", "title": "Silver hair, same wardrobe", "edit": "Age the woman while retaining her pose and position.", "observation": "Both outputs perform the age edit. The guided result retains the white jacket, while the baseline changes the outfit."},
-        {"id": "0111", "title": "Metallic red, same scene", "edit": "Change the green muscle car to metallic red.", "observation": "Both versions perform the color edit. This example illustrates a localized change with the presenter and setting retained."}
+        {
+          "id": "0068",
+          "title": "An armored vehicle in the original chase",
+          "edit": "Replace the car with a matte green armored military vehicle, retaining its position and pose.",
+          "observation": "The baseline turns the vehicle to face the camera and loses the game interface. The guided result keeps the rear chase view, route display, and presenter inset."
+        },
+        {
+          "id": "0063",
+          "title": "A new desk, the same office",
+          "edit": "Replace the desk with a rustic farmhouse-style wooden desk.",
+          "observation": "The baseline removes the stacked document trays and replaces the black office chair. Proxy guidance changes the desk while retaining both original items."
+        }
       ]
     },
     {
@@ -37,8 +67,12 @@
       "title": "Object removal",
       "description": "Render the desired scene without the selected entity, then let the video model realize it.",
       "cases": [
-        {"id": "0211", "title": "Remove the surrounding keyboard", "edit": "Remove the crescent-shaped keyboard around the piano.", "observation": "The keyboard ring remains in the no-proxy output and disappears with the edited scene proxy."},
-        {"id": "0189", "title": "A clear view through the window", "edit": "Remove the person standing beside the window.", "observation": "Both outputs remove the person. Compare the completed city view and the retained details of the room."}
+        {
+          "id": "0211",
+          "title": "Remove the surrounding keyboard",
+          "edit": "Remove the crescent-shaped keyboard around the piano.",
+          "observation": "The keyboard ring remains throughout the no-proxy output. The guided result removes the ring while retaining the central piano."
+        }
       ]
     },
     {
@@ -46,26 +80,38 @@
       "title": "Background replacement",
       "description": "Plan a new environment while retaining the foreground subject.",
       "cases": [
-        {"id": "0166", "title": "A new set, the same speaker", "edit": "Replace the newsroom with a cyber command center.", "observation": "The baseline creates an empty command room. The proxy-guided result keeps the speaker in the new environment."},
-        {"id": "0156", "title": "A tropical setting for the sports car", "edit": "Place the sports car against a tropical beach.", "observation": "Palm trees, surf, and seabirds establish the new background around the foreground car."}
+        {
+          "id": "0166",
+          "title": "A new set, the same speaker",
+          "edit": "Replace the newsroom with a futuristic cyber command center.",
+          "observation": "The baseline creates an empty command room and loses the speaker. The proxy-guided result retains her in the new environment."
+        }
       ]
     },
     {
       "id": "creative_edit",
       "title": "Creative transformation",
       "description": "Use procedural shapes and effects to give an imagined transformation a visible plan.",
-      "cases": [
-        {"id": "0318", "title": "From Ferris wheel to celestial portal", "edit": "Transform the Ferris wheel into a glowing celestial portal.", "observation": "The proxy organizes the portal and its reflection. The guided output forms a distinct blue-violet portal at the waterfront."},
-        {"id": "0332", "title": "Tea cups become tiny worlds", "edit": "Transform the tea into miniature forest-and-pond ecosystems.", "observation": "The guided transformation appears from the opening frames, while the no-proxy result introduces it gradually."}
-      ]
+      "cases": [],
+      "empty_message": "Showcases to be added."
     },
     {
       "id": "global_style",
       "title": "Global stylization",
       "description": "Give the requested visual treatment a concrete procedural preview.",
       "cases": [
-        {"id": "0041", "title": "A portrait in graphic color", "edit": "Render the portrait in a Pop Art aesthetic.", "observation": "The baseline retains photographic texture. Proxy guidance brings in drawn contours, graphic color, and halftone detail."},
-        {"id": "0055", "title": "Rain over the lake", "edit": "Give the lakeside scene a rainy atmosphere.", "observation": "Clouds and rain establish the new weather, while the no-proxy result remains closer to the sunny source."}
+        {
+          "id": "0041",
+          "title": "A portrait in graphic color",
+          "edit": "Render the portrait in a Pop Art aesthetic.",
+          "observation": "The baseline mainly recolors photographic texture. Proxy guidance adds the requested graphic outlines and halftone detail."
+        },
+        {
+          "id": "0055",
+          "title": "Rain over the lake",
+          "edit": "Give the lakeside scene a rainy atmosphere.",
+          "observation": "The no-proxy result retains the sunny weather. The guided result introduces visible rain and a darker, cloudier atmosphere."
+        }
       ]
     },
     {
@@ -73,8 +119,18 @@
       "title": "Subtitle removal",
       "description": "Express the underlying scene without text and retain its visual context.",
       "cases": [
-        {"id": "0405", "title": "Clean sky, no subtitle band", "edit": "Remove the subtitles from the aerial landscape.", "observation": "The no-proxy output retains the top caption. The guided result removes the band while retaining the landscape."},
-        {"id": "0395", "title": "Clean frames for an animated scene", "edit": "Remove the subtitles from the animated scene.", "observation": "Subtitle text remains in the baseline; the proxy-guided output removes the overlay."}
+        {
+          "id": "0405",
+          "title": "Clean sky, no subtitle band",
+          "edit": "Remove the subtitles from the aerial landscape.",
+          "observation": "The no-proxy output retains the top caption. The guided result removes the band while retaining the landscape."
+        },
+        {
+          "id": "0395",
+          "title": "Clean frames for an animated scene",
+          "edit": "Remove the subtitles from the animated scene.",
+          "observation": "Subtitle text remains in the baseline; the proxy-guided output removes the overlay."
+        }
       ]
     }
   ]

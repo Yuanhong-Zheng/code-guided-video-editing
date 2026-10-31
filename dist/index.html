@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f8f8f3">
   <title>Code-Guided Video Editing · Yuanhong Zheng</title>
-  <meta name="description" content="An executable plan for editing an existing video. Explore 16 examples across eight tasks, with source, proxy, and matched H3 outputs side by side.">
+  <meta name="description" content="An executable plan for editing an existing video. Explore 12 selected comparisons, with source, proxy, and matched H3 outputs side by side.">
   <link rel="canonical" href="https://yuanhong-zheng.github.io/code-guided-video-editing/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Code-Guided Video Editing with Source-Grounded Executable Proxies">
@@ -16,8 +16,8 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=779daa864c76">
+  <script src="app.js?v=ef057b1a4a24" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to video comparisons</a>
@@ -30,7 +30,7 @@
       <div class="nav-links">
         <a href="#results">Results</a>
         <a href="#method">How it works</a>
-        <a href="assets/paper.pdf?v=b80cc9948b42" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+        <a href="assets/paper.pdf?v=cb25e44f46bf" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
   </header>
@@ -43,11 +43,11 @@
       <p class="hero-description">Turn an editing instruction into a plan you can inspect.<br class="desktop-break"> A scene program makes the edit explicit; a video model brings it to life.</p>
       <div class="hero-actions">
         <a class="button button-primary" href="#results">Explore the results <span aria-hidden="true">↓</span></a>
-        <a class="button button-paper" href="assets/paper.pdf?v=b80cc9948b42" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2h7l4 4v12H5Z"/><path d="M12 2v5h4M8 10h5M8 13h5"/></svg> Read the paper</a>
+        <a class="button button-paper" href="assets/paper.pdf?v=cb25e44f46bf" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2h7l4 4v12H5Z"/><path d="M12 2v5h4M8 10h5M8 13h5"/></svg> Read the paper</a>
         <a class="button button-quiet" href="https://github.com/Yuanhong-Zheng/code-guided-video-editing" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
       </div>
       <div class="hero-facts" aria-label="Gallery contents">
-        <span><b>8</b> editing tasks</span><i></i><span><b>16</b> selected examples</span><i></i><span><b>4</b> aligned views</span>
+        <span><b>8</b> editing tasks</span><i></i><span><b>12</b> selected comparisons</span><i></i><span><b>4</b> aligned views</span>
       </div>
     </section>
 
@@ -149,89 +149,45 @@
       <input class="seek" type="range" min="0" max="5.04166667" value="0" step="0.04166667" aria-label="Seek all four videos in case 0355">
       <span class="time-label">0.0 / 5.0 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
     </div>
-    <p class="case-observation">The executable camera plan establishes the wider composition; the source remains the visual reference.</p>
+    <p class="case-observation">The no-proxy result keeps the close framing and cropped sails. The guided result reveals the full sailboat and more surrounding sea.</p>
     <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
   </article>
         </section>
 <section class="task-section container" id="local_add" aria-labelledby="task-local_add">
           <div class="task-heading"><span class="task-number" aria-hidden="true">02</span><div><h2 id="task-local_add">Object addition</h2><p>Give new objects a concrete location, scale, and behavior in the existing shot.</p></div></div>
-          <article class="case-card" id="case-0292" data-case-id="0292" data-duration="3.04166667" aria-labelledby="title-0292">
-    <div class="case-heading"><h3 id="title-0292">A wall clock, placed in context</h3><a class="case-id" href="#case-0292" aria-label="Link to case 0292">CASE 0292 ↗</a></div>
-    <p class="edit-request"><b>Edit request</b>Add a wall clock to the person&#x27;s left.</p>
-    <div class="video-grid"><figure class="video-panel source" data-role="source">
-      <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0292/source.jpg" alt="Source video: A wall clock, placed in context" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0292/source.mp4" aria-label="Source video: A wall clock, placed in context" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0292/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: A wall clock, placed in context in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel proxy" data-role="proxy">
-      <figcaption class="view-label"><span>Executable proxy</span><span>PLAN</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0292/proxy.jpg" alt="Executable proxy: A wall clock, placed in context" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0292/proxy.mp4" aria-label="Executable proxy: A wall clock, placed in context" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0292/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: A wall clock, placed in context in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel baseline" data-role="without-proxy">
-      <figcaption class="view-label"><span>Without proxy</span><span>H3</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0292/without-proxy.jpg" alt="Without proxy: A wall clock, placed in context" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0292/without-proxy.mp4" aria-label="Without proxy: A wall clock, placed in context" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0292/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: A wall clock, placed in context in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel guided" data-role="with-proxy">
-      <figcaption class="view-label"><span>With proxy</span><span>EARLY-STEP</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0292/with-proxy.jpg" alt="With proxy: A wall clock, placed in context" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0292/with-proxy.mp4" aria-label="With proxy: A wall clock, placed in context" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0292/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: A wall clock, placed in context in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure></div>
-    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0292">
-      <button class="transport" data-action="play" type="button" aria-label="Play all four videos" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>Play</span></button>
-      <button class="transport" data-action="restart" type="button" aria-label="Restart all four videos"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>Restart</span></button>
-      <input class="seek" type="range" min="0" max="3.04166667" value="0" step="0.04166667" aria-label="Seek all four videos in case 0292">
-      <span class="time-label">0.0 / 3.0 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
-    </div>
-    <p class="case-observation">The no-proxy clock is oversized. Proxy guidance follows the planned placement and scale more closely.</p>
-    <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
-  </article>
-<article class="case-card" id="case-0246" data-case-id="0246" data-duration="3.20833333" aria-labelledby="title-0246">
-    <div class="case-heading"><h3 id="title-0246">A seagull above the coast</h3><a class="case-id" href="#case-0246" aria-label="Link to case 0246">CASE 0246 ↗</a></div>
+          <article class="case-card" id="case-0246" data-case-id="0246" data-duration="3.20833333" aria-labelledby="title-0246">
+    <div class="case-heading"><h3 id="title-0246">A seagull without losing the sailboat</h3><a class="case-id" href="#case-0246" aria-label="Link to case 0246">CASE 0246 ↗</a></div>
     <p class="edit-request"><b>Edit request</b>Add a flying seagull in the upper-left sky.</p>
     <div class="video-grid"><figure class="video-panel source" data-role="source">
       <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0246/source.jpg" alt="Source video: A seagull above the coast" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0246/source.mp4" aria-label="Source video: A seagull above the coast" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0246/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: A seagull above the coast in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0246/source.jpg" alt="Source video: A seagull without losing the sailboat" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0246/source.mp4" aria-label="Source video: A seagull without losing the sailboat" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0246/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: A seagull without losing the sailboat in a new tab" title="Open this video">↗</a>
       </div>
     </figure>
 <figure class="video-panel proxy" data-role="proxy">
       <figcaption class="view-label"><span>Executable proxy</span><span>PLAN</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0246/proxy.jpg" alt="Executable proxy: A seagull above the coast" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0246/proxy.mp4" aria-label="Executable proxy: A seagull above the coast" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0246/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: A seagull above the coast in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0246/proxy.jpg" alt="Executable proxy: A seagull without losing the sailboat" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0246/proxy.mp4" aria-label="Executable proxy: A seagull without losing the sailboat" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0246/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: A seagull without losing the sailboat in a new tab" title="Open this video">↗</a>
       </div>
     </figure>
 <figure class="video-panel baseline" data-role="without-proxy">
       <figcaption class="view-label"><span>Without proxy</span><span>H3</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0246/without-proxy.jpg" alt="Without proxy: A seagull above the coast" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0246/without-proxy.mp4" aria-label="Without proxy: A seagull above the coast" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0246/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: A seagull above the coast in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0246/without-proxy.jpg" alt="Without proxy: A seagull without losing the sailboat" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0246/without-proxy.mp4" aria-label="Without proxy: A seagull without losing the sailboat" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0246/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: A seagull without losing the sailboat in a new tab" title="Open this video">↗</a>
       </div>
     </figure>
 <figure class="video-panel guided" data-role="with-proxy">
       <figcaption class="view-label"><span>With proxy</span><span>EARLY-STEP</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0246/with-proxy.jpg" alt="With proxy: A seagull above the coast" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0246/with-proxy.mp4" aria-label="With proxy: A seagull above the coast" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0246/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: A seagull above the coast in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0246/with-proxy.jpg" alt="With proxy: A seagull without losing the sailboat" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0246/with-proxy.mp4" aria-label="With proxy: A seagull without losing the sailboat" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0246/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: A seagull without losing the sailboat in a new tab" title="Open this video">↗</a>
       </div>
     </figure></div>
     <div class="case-controls" role="group" aria-label="Synchronized playback for case 0246">
@@ -240,98 +196,142 @@
       <input class="seek" type="range" min="0" max="3.20833333" value="0" step="0.04166667" aria-label="Seek all four videos in case 0246">
       <span class="time-label">0.0 / 3.2 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
     </div>
-    <p class="case-observation">The guided bird stays closer to the proxy&#x27;s intended location and scale, instead of dominating the foreground.</p>
+    <p class="case-observation">The baseline adds the bird but removes the original sailboat. Proxy guidance adds the seagull while retaining the boat and rocky coast.</p>
+    <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
+  </article>
+<article class="case-card" id="case-0294" data-case-id="0294" data-duration="3.08333333" aria-labelledby="title-0294">
+    <div class="case-heading"><h3 id="title-0294">A seagull on the sunset beach</h3><a class="case-id" href="#case-0294" aria-label="Link to case 0294">CASE 0294 ↗</a></div>
+    <p class="edit-request"><b>Edit request</b>Add a standing seagull near the shoreline.</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0294/source.jpg" alt="Source video: A seagull on the sunset beach" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0294/source.mp4" aria-label="Source video: A seagull on the sunset beach" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0294/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: A seagull on the sunset beach in a new tab" title="Open this video">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>Executable proxy</span><span>PLAN</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0294/proxy.jpg" alt="Executable proxy: A seagull on the sunset beach" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0294/proxy.mp4" aria-label="Executable proxy: A seagull on the sunset beach" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0294/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: A seagull on the sunset beach in a new tab" title="Open this video">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>Without proxy</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0294/without-proxy.jpg" alt="Without proxy: A seagull on the sunset beach" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0294/without-proxy.mp4" aria-label="Without proxy: A seagull on the sunset beach" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0294/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: A seagull on the sunset beach in a new tab" title="Open this video">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>With proxy</span><span>EARLY-STEP</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0294/with-proxy.jpg" alt="With proxy: A seagull on the sunset beach" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0294/with-proxy.mp4" aria-label="With proxy: A seagull on the sunset beach" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0294/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: A seagull on the sunset beach in a new tab" title="Open this video">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0294">
+      <button class="transport" data-action="play" type="button" aria-label="Play all four videos" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>Play</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="Restart all four videos"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>Restart</span></button>
+      <input class="seek" type="range" min="0" max="3.08333333" value="0" step="0.04166667" aria-label="Seek all four videos in case 0294">
+      <span class="time-label">0.0 / 3.1 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
+    </div>
+    <p class="case-observation">Without a proxy, the wide beach scene becomes a close-up of the bird. The guided result adds a seagull on the sand while retaining the sunset and wide composition.</p>
     <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
   </article>
         </section>
 <section class="task-section container" id="local_change" aria-labelledby="task-local_change">
           <div class="task-heading"><span class="task-number" aria-hidden="true">03</span><div><h2 id="task-local_change">Local modification</h2><p>Specify the intended change while giving the rest of the scene a persistent reference.</p></div></div>
-          <article class="case-card" id="case-0089" data-case-id="0089" data-duration="3.54166667" aria-labelledby="title-0089">
-    <div class="case-heading"><h3 id="title-0089">Silver hair, same wardrobe</h3><a class="case-id" href="#case-0089" aria-label="Link to case 0089">CASE 0089 ↗</a></div>
-    <p class="edit-request"><b>Edit request</b>Age the woman while retaining her pose and position.</p>
+          <article class="case-card" id="case-0068" data-case-id="0068" data-duration="3.50000000" aria-labelledby="title-0068">
+    <div class="case-heading"><h3 id="title-0068">An armored vehicle in the original chase</h3><a class="case-id" href="#case-0068" aria-label="Link to case 0068">CASE 0068 ↗</a></div>
+    <p class="edit-request"><b>Edit request</b>Replace the car with a matte green armored military vehicle, retaining its position and pose.</p>
     <div class="video-grid"><figure class="video-panel source" data-role="source">
       <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0089/source.jpg" alt="Source video: Silver hair, same wardrobe" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0089/source.mp4" aria-label="Source video: Silver hair, same wardrobe" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0089/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: Silver hair, same wardrobe in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0068/source.jpg" alt="Source video: An armored vehicle in the original chase" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0068/source.mp4" aria-label="Source video: An armored vehicle in the original chase" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0068/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: An armored vehicle in the original chase in a new tab" title="Open this video">↗</a>
       </div>
     </figure>
 <figure class="video-panel proxy" data-role="proxy">
       <figcaption class="view-label"><span>Executable proxy</span><span>PLAN</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0089/proxy.jpg" alt="Executable proxy: Silver hair, same wardrobe" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0089/proxy.mp4" aria-label="Executable proxy: Silver hair, same wardrobe" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0089/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: Silver hair, same wardrobe in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0068/proxy.jpg" alt="Executable proxy: An armored vehicle in the original chase" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0068/proxy.mp4" aria-label="Executable proxy: An armored vehicle in the original chase" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0068/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: An armored vehicle in the original chase in a new tab" title="Open this video">↗</a>
       </div>
     </figure>
 <figure class="video-panel baseline" data-role="without-proxy">
       <figcaption class="view-label"><span>Without proxy</span><span>H3</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0089/without-proxy.jpg" alt="Without proxy: Silver hair, same wardrobe" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0089/without-proxy.mp4" aria-label="Without proxy: Silver hair, same wardrobe" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0089/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: Silver hair, same wardrobe in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0068/without-proxy.jpg" alt="Without proxy: An armored vehicle in the original chase" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0068/without-proxy.mp4" aria-label="Without proxy: An armored vehicle in the original chase" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0068/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: An armored vehicle in the original chase in a new tab" title="Open this video">↗</a>
       </div>
     </figure>
 <figure class="video-panel guided" data-role="with-proxy">
       <figcaption class="view-label"><span>With proxy</span><span>EARLY-STEP</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0089/with-proxy.jpg" alt="With proxy: Silver hair, same wardrobe" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0089/with-proxy.mp4" aria-label="With proxy: Silver hair, same wardrobe" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0089/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: Silver hair, same wardrobe in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0068/with-proxy.jpg" alt="With proxy: An armored vehicle in the original chase" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0068/with-proxy.mp4" aria-label="With proxy: An armored vehicle in the original chase" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0068/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: An armored vehicle in the original chase in a new tab" title="Open this video">↗</a>
       </div>
     </figure></div>
-    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0089">
+    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0068">
       <button class="transport" data-action="play" type="button" aria-label="Play all four videos" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>Play</span></button>
       <button class="transport" data-action="restart" type="button" aria-label="Restart all four videos"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>Restart</span></button>
-      <input class="seek" type="range" min="0" max="3.54166667" value="0" step="0.04166667" aria-label="Seek all four videos in case 0089">
+      <input class="seek" type="range" min="0" max="3.50000000" value="0" step="0.04166667" aria-label="Seek all four videos in case 0068">
       <span class="time-label">0.0 / 3.5 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
     </div>
-    <p class="case-observation">Both outputs perform the age edit. The guided result retains the white jacket, while the baseline changes the outfit.</p>
+    <p class="case-observation">The baseline turns the vehicle to face the camera and loses the game interface. The guided result keeps the rear chase view, route display, and presenter inset.</p>
     <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
   </article>
-<article class="case-card" id="case-0111" data-case-id="0111" data-duration="4.20833333" aria-labelledby="title-0111">
-    <div class="case-heading"><h3 id="title-0111">Metallic red, same scene</h3><a class="case-id" href="#case-0111" aria-label="Link to case 0111">CASE 0111 ↗</a></div>
-    <p class="edit-request"><b>Edit request</b>Change the green muscle car to metallic red.</p>
+<article class="case-card" id="case-0063" data-case-id="0063" data-duration="2.58333333" aria-labelledby="title-0063">
+    <div class="case-heading"><h3 id="title-0063">A new desk, the same office</h3><a class="case-id" href="#case-0063" aria-label="Link to case 0063">CASE 0063 ↗</a></div>
+    <p class="edit-request"><b>Edit request</b>Replace the desk with a rustic farmhouse-style wooden desk.</p>
     <div class="video-grid"><figure class="video-panel source" data-role="source">
       <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0111/source.jpg" alt="Source video: Metallic red, same scene" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0111/source.mp4" aria-label="Source video: Metallic red, same scene" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0111/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: Metallic red, same scene in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0063/source.jpg" alt="Source video: A new desk, the same office" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0063/source.mp4" aria-label="Source video: A new desk, the same office" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0063/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: A new desk, the same office in a new tab" title="Open this video">↗</a>
       </div>
     </figure>
 <figure class="video-panel proxy" data-role="proxy">
       <figcaption class="view-label"><span>Executable proxy</span><span>PLAN</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0111/proxy.jpg" alt="Executable proxy: Metallic red, same scene" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0111/proxy.mp4" aria-label="Executable proxy: Metallic red, same scene" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0111/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: Metallic red, same scene in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0063/proxy.jpg" alt="Executable proxy: A new desk, the same office" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0063/proxy.mp4" aria-label="Executable proxy: A new desk, the same office" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0063/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: A new desk, the same office in a new tab" title="Open this video">↗</a>
       </div>
     </figure>
 <figure class="video-panel baseline" data-role="without-proxy">
       <figcaption class="view-label"><span>Without proxy</span><span>H3</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0111/without-proxy.jpg" alt="Without proxy: Metallic red, same scene" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0111/without-proxy.mp4" aria-label="Without proxy: Metallic red, same scene" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0111/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: Metallic red, same scene in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0063/without-proxy.jpg" alt="Without proxy: A new desk, the same office" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0063/without-proxy.mp4" aria-label="Without proxy: A new desk, the same office" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0063/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: A new desk, the same office in a new tab" title="Open this video">↗</a>
       </div>
     </figure>
 <figure class="video-panel guided" data-role="with-proxy">
       <figcaption class="view-label"><span>With proxy</span><span>EARLY-STEP</span></figcaption>
       <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0111/with-proxy.jpg" alt="With proxy: Metallic red, same scene" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0111/with-proxy.mp4" aria-label="With proxy: Metallic red, same scene" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0111/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: Metallic red, same scene in a new tab" title="Open this video">↗</a>
+        <img class="video-poster" src="assets/cases/0063/with-proxy.jpg" alt="With proxy: A new desk, the same office" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0063/with-proxy.mp4" aria-label="With proxy: A new desk, the same office" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0063/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: A new desk, the same office in a new tab" title="Open this video">↗</a>
       </div>
     </figure></div>
-    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0111">
+    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0063">
       <button class="transport" data-action="play" type="button" aria-label="Play all four videos" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>Play</span></button>
       <button class="transport" data-action="restart" type="button" aria-label="Restart all four videos"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>Restart</span></button>
-      <input class="seek" type="range" min="0" max="4.20833333" value="0" step="0.04166667" aria-label="Seek all four videos in case 0111">
-      <span class="time-label">0.0 / 4.2 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
+      <input class="seek" type="range" min="0" max="2.58333333" value="0" step="0.04166667" aria-label="Seek all four videos in case 0063">
+      <span class="time-label">0.0 / 2.6 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
     </div>
-    <p class="case-observation">Both versions perform the color edit. This example illustrates a localized change with the presenter and setting retained.</p>
+    <p class="case-observation">The baseline removes the stacked document trays and replaces the black office chair. Proxy guidance changes the desk while retaining both original items.</p>
     <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
   </article>
         </section>
@@ -378,51 +378,7 @@
       <input class="seek" type="range" min="0" max="2.16666667" value="0" step="0.04166667" aria-label="Seek all four videos in case 0211">
       <span class="time-label">0.0 / 2.2 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
     </div>
-    <p class="case-observation">The keyboard ring remains in the no-proxy output and disappears with the edited scene proxy.</p>
-    <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
-  </article>
-<article class="case-card" id="case-0189" data-case-id="0189" data-duration="4.83333333" aria-labelledby="title-0189">
-    <div class="case-heading"><h3 id="title-0189">A clear view through the window</h3><a class="case-id" href="#case-0189" aria-label="Link to case 0189">CASE 0189 ↗</a></div>
-    <p class="edit-request"><b>Edit request</b>Remove the person standing beside the window.</p>
-    <div class="video-grid"><figure class="video-panel source" data-role="source">
-      <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0189/source.jpg" alt="Source video: A clear view through the window" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0189/source.mp4" aria-label="Source video: A clear view through the window" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0189/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: A clear view through the window in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel proxy" data-role="proxy">
-      <figcaption class="view-label"><span>Executable proxy</span><span>PLAN</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0189/proxy.jpg" alt="Executable proxy: A clear view through the window" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0189/proxy.mp4" aria-label="Executable proxy: A clear view through the window" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0189/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: A clear view through the window in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel baseline" data-role="without-proxy">
-      <figcaption class="view-label"><span>Without proxy</span><span>H3</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0189/without-proxy.jpg" alt="Without proxy: A clear view through the window" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0189/without-proxy.mp4" aria-label="Without proxy: A clear view through the window" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0189/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: A clear view through the window in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel guided" data-role="with-proxy">
-      <figcaption class="view-label"><span>With proxy</span><span>EARLY-STEP</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0189/with-proxy.jpg" alt="With proxy: A clear view through the window" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0189/with-proxy.mp4" aria-label="With proxy: A clear view through the window" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0189/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: A clear view through the window in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure></div>
-    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0189">
-      <button class="transport" data-action="play" type="button" aria-label="Play all four videos" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>Play</span></button>
-      <button class="transport" data-action="restart" type="button" aria-label="Restart all four videos"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>Restart</span></button>
-      <input class="seek" type="range" min="0" max="4.83333333" value="0" step="0.04166667" aria-label="Seek all four videos in case 0189">
-      <span class="time-label">0.0 / 4.8 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
-    </div>
-    <p class="case-observation">Both outputs remove the person. Compare the completed city view and the retained details of the room.</p>
+    <p class="case-observation">The keyboard ring remains throughout the no-proxy output. The guided result removes the ring while retaining the central piano.</p>
     <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
   </article>
         </section>
@@ -430,7 +386,7 @@
           <div class="task-heading"><span class="task-number" aria-hidden="true">05</span><div><h2 id="task-background_change">Background replacement</h2><p>Plan a new environment while retaining the foreground subject.</p></div></div>
           <article class="case-card" id="case-0166" data-case-id="0166" data-duration="3.08333333" aria-labelledby="title-0166">
     <div class="case-heading"><h3 id="title-0166">A new set, the same speaker</h3><a class="case-id" href="#case-0166" aria-label="Link to case 0166">CASE 0166 ↗</a></div>
-    <p class="edit-request"><b>Edit request</b>Replace the newsroom with a cyber command center.</p>
+    <p class="edit-request"><b>Edit request</b>Replace the newsroom with a futuristic cyber command center.</p>
     <div class="video-grid"><figure class="video-panel source" data-role="source">
       <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
       <div class="video-frame">
@@ -469,144 +425,13 @@
       <input class="seek" type="range" min="0" max="3.08333333" value="0" step="0.04166667" aria-label="Seek all four videos in case 0166">
       <span class="time-label">0.0 / 3.1 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
     </div>
-    <p class="case-observation">The baseline creates an empty command room. The proxy-guided result keeps the speaker in the new environment.</p>
-    <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
-  </article>
-<article class="case-card" id="case-0156" data-case-id="0156" data-duration="2.83333333" aria-labelledby="title-0156">
-    <div class="case-heading"><h3 id="title-0156">A tropical setting for the sports car</h3><a class="case-id" href="#case-0156" aria-label="Link to case 0156">CASE 0156 ↗</a></div>
-    <p class="edit-request"><b>Edit request</b>Place the sports car against a tropical beach.</p>
-    <div class="video-grid"><figure class="video-panel source" data-role="source">
-      <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0156/source.jpg" alt="Source video: A tropical setting for the sports car" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0156/source.mp4" aria-label="Source video: A tropical setting for the sports car" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0156/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: A tropical setting for the sports car in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel proxy" data-role="proxy">
-      <figcaption class="view-label"><span>Executable proxy</span><span>PLAN</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0156/proxy.jpg" alt="Executable proxy: A tropical setting for the sports car" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0156/proxy.mp4" aria-label="Executable proxy: A tropical setting for the sports car" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0156/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: A tropical setting for the sports car in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel baseline" data-role="without-proxy">
-      <figcaption class="view-label"><span>Without proxy</span><span>H3</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0156/without-proxy.jpg" alt="Without proxy: A tropical setting for the sports car" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0156/without-proxy.mp4" aria-label="Without proxy: A tropical setting for the sports car" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0156/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: A tropical setting for the sports car in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel guided" data-role="with-proxy">
-      <figcaption class="view-label"><span>With proxy</span><span>EARLY-STEP</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0156/with-proxy.jpg" alt="With proxy: A tropical setting for the sports car" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0156/with-proxy.mp4" aria-label="With proxy: A tropical setting for the sports car" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0156/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: A tropical setting for the sports car in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure></div>
-    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0156">
-      <button class="transport" data-action="play" type="button" aria-label="Play all four videos" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>Play</span></button>
-      <button class="transport" data-action="restart" type="button" aria-label="Restart all four videos"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>Restart</span></button>
-      <input class="seek" type="range" min="0" max="2.83333333" value="0" step="0.04166667" aria-label="Seek all four videos in case 0156">
-      <span class="time-label">0.0 / 2.8 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
-    </div>
-    <p class="case-observation">Palm trees, surf, and seabirds establish the new background around the foreground car.</p>
+    <p class="case-observation">The baseline creates an empty command room and loses the speaker. The proxy-guided result retains her in the new environment.</p>
     <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
   </article>
         </section>
 <section class="task-section container" id="creative_edit" aria-labelledby="task-creative_edit">
           <div class="task-heading"><span class="task-number" aria-hidden="true">06</span><div><h2 id="task-creative_edit">Creative transformation</h2><p>Use procedural shapes and effects to give an imagined transformation a visible plan.</p></div></div>
-          <article class="case-card" id="case-0318" data-case-id="0318" data-duration="5.04166667" aria-labelledby="title-0318">
-    <div class="case-heading"><h3 id="title-0318">From Ferris wheel to celestial portal</h3><a class="case-id" href="#case-0318" aria-label="Link to case 0318">CASE 0318 ↗</a></div>
-    <p class="edit-request"><b>Edit request</b>Transform the Ferris wheel into a glowing celestial portal.</p>
-    <div class="video-grid"><figure class="video-panel source" data-role="source">
-      <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0318/source.jpg" alt="Source video: From Ferris wheel to celestial portal" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0318/source.mp4" aria-label="Source video: From Ferris wheel to celestial portal" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0318/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: From Ferris wheel to celestial portal in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel proxy" data-role="proxy">
-      <figcaption class="view-label"><span>Executable proxy</span><span>PLAN</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0318/proxy.jpg" alt="Executable proxy: From Ferris wheel to celestial portal" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0318/proxy.mp4" aria-label="Executable proxy: From Ferris wheel to celestial portal" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0318/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: From Ferris wheel to celestial portal in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel baseline" data-role="without-proxy">
-      <figcaption class="view-label"><span>Without proxy</span><span>H3</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0318/without-proxy.jpg" alt="Without proxy: From Ferris wheel to celestial portal" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0318/without-proxy.mp4" aria-label="Without proxy: From Ferris wheel to celestial portal" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0318/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: From Ferris wheel to celestial portal in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel guided" data-role="with-proxy">
-      <figcaption class="view-label"><span>With proxy</span><span>EARLY-STEP</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0318/with-proxy.jpg" alt="With proxy: From Ferris wheel to celestial portal" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0318/with-proxy.mp4" aria-label="With proxy: From Ferris wheel to celestial portal" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0318/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: From Ferris wheel to celestial portal in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure></div>
-    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0318">
-      <button class="transport" data-action="play" type="button" aria-label="Play all four videos" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>Play</span></button>
-      <button class="transport" data-action="restart" type="button" aria-label="Restart all four videos"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>Restart</span></button>
-      <input class="seek" type="range" min="0" max="5.04166667" value="0" step="0.04166667" aria-label="Seek all four videos in case 0318">
-      <span class="time-label">0.0 / 5.0 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
-    </div>
-    <p class="case-observation">The proxy organizes the portal and its reflection. The guided output forms a distinct blue-violet portal at the waterfront.</p>
-    <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
-  </article>
-<article class="case-card" id="case-0332" data-case-id="0332" data-duration="5.04166667" aria-labelledby="title-0332">
-    <div class="case-heading"><h3 id="title-0332">Tea cups become tiny worlds</h3><a class="case-id" href="#case-0332" aria-label="Link to case 0332">CASE 0332 ↗</a></div>
-    <p class="edit-request"><b>Edit request</b>Transform the tea into miniature forest-and-pond ecosystems.</p>
-    <div class="video-grid"><figure class="video-panel source" data-role="source">
-      <figcaption class="view-label"><span>Source video</span><span>INPUT</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0332/source.jpg" alt="Source video: Tea cups become tiny worlds" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0332/source.mp4" aria-label="Source video: Tea cups become tiny worlds" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0332/source.mp4" target="_blank" rel="noopener" aria-label="Open Source video: Tea cups become tiny worlds in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel proxy" data-role="proxy">
-      <figcaption class="view-label"><span>Executable proxy</span><span>PLAN</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0332/proxy.jpg" alt="Executable proxy: Tea cups become tiny worlds" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0332/proxy.mp4" aria-label="Executable proxy: Tea cups become tiny worlds" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0332/proxy.mp4" target="_blank" rel="noopener" aria-label="Open Executable proxy: Tea cups become tiny worlds in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel baseline" data-role="without-proxy">
-      <figcaption class="view-label"><span>Without proxy</span><span>H3</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0332/without-proxy.jpg" alt="Without proxy: Tea cups become tiny worlds" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0332/without-proxy.mp4" aria-label="Without proxy: Tea cups become tiny worlds" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0332/without-proxy.mp4" target="_blank" rel="noopener" aria-label="Open Without proxy: Tea cups become tiny worlds in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure>
-<figure class="video-panel guided" data-role="with-proxy">
-      <figcaption class="view-label"><span>With proxy</span><span>EARLY-STEP</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="assets/cases/0332/with-proxy.jpg" alt="With proxy: Tea cups become tiny worlds" width="960" height="544" loading="lazy" decoding="async">
-        <video muted playsinline loop preload="none" data-src="assets/cases/0332/with-proxy.mp4" aria-label="With proxy: Tea cups become tiny worlds" tabindex="-1"></video>
-        <a class="open-video" href="assets/cases/0332/with-proxy.mp4" target="_blank" rel="noopener" aria-label="Open With proxy: Tea cups become tiny worlds in a new tab" title="Open this video">↗</a>
-      </div>
-    </figure></div>
-    <div class="case-controls" role="group" aria-label="Synchronized playback for case 0332">
-      <button class="transport" data-action="play" type="button" aria-label="Play all four videos" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>Play</span></button>
-      <button class="transport" data-action="restart" type="button" aria-label="Restart all four videos"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>Restart</span></button>
-      <input class="seek" type="range" min="0" max="5.04166667" value="0" step="0.04166667" aria-label="Seek all four videos in case 0332">
-      <span class="time-label">0.0 / 5.0 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
-    </div>
-    <p class="case-observation">The guided transformation appears from the opening frames, while the no-proxy result introduces it gradually.</p>
-    <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
-  </article>
+          <div class="empty-showcase">Showcases to be added.</div>
         </section>
 <section class="task-section container" id="global_style" aria-labelledby="task-global_style">
           <div class="task-heading"><span class="task-number" aria-hidden="true">07</span><div><h2 id="task-global_style">Global stylization</h2><p>Give the requested visual treatment a concrete procedural preview.</p></div></div>
@@ -651,7 +476,7 @@
       <input class="seek" type="range" min="0" max="4.04166667" value="0" step="0.04166667" aria-label="Seek all four videos in case 0041">
       <span class="time-label">0.0 / 4.0 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
     </div>
-    <p class="case-observation">The baseline retains photographic texture. Proxy guidance brings in drawn contours, graphic color, and halftone detail.</p>
+    <p class="case-observation">The baseline mainly recolors photographic texture. Proxy guidance adds the requested graphic outlines and halftone detail.</p>
     <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
   </article>
 <article class="case-card" id="case-0055" data-case-id="0055" data-duration="2.70833333" aria-labelledby="title-0055">
@@ -695,7 +520,7 @@
       <input class="seek" type="range" min="0" max="2.70833333" value="0" step="0.04166667" aria-label="Seek all four videos in case 0055">
       <span class="time-label">0.0 / 2.7 s</span><span class="loop-note">4 views · muted · loop</span><span class="case-status" role="status">Loading…</span>
     </div>
-    <p class="case-observation">Clouds and rain establish the new weather, while the no-proxy result remains closer to the sunny source.</p>
+    <p class="case-observation">The no-proxy result retains the sunny weather. The guided result introduces visible rain and a darker, cloudier atmosphere.</p>
     <div class="case-error" role="status"><span>Video playback could not load. You can retry or open an individual video.</span><button type="button" data-action="retry">Retry</button></div>
   </article>
         </section>
@@ -792,23 +617,23 @@
         </section>
       <div class="gallery-note container">
         <span class="note-line"></span>
-        <p>Selected qualitative examples from OpenVE-Bench. Both output groups use the same frozen INT8 MiniMax-H3 model, seed 42, and 20 sampling steps. The source remains active throughout; the edited proxy is used only in the first five steps. Edit descriptions are abbreviated for readability.</p>
+        <p>Selected OpenVE-Bench comparisons with visible improvements from proxy guidance. Both output groups use the same frozen INT8 MiniMax-H3 model, seed 42, and 20 sampling steps. The source remains active throughout; the edited proxy is used only in the first five steps. Edit descriptions are abbreviated for readability.</p>
       </div>
     </section>
 
     <section id="method" class="method-section container">
       <div class="method-copy"><p class="eyebrow">THE IDEA</p><h2>A visible plan.<br>An editable program.</h2>
-        <p>A coding agent observes the source video and edit request, then builds a procedural scene. Rendering the scene produces a proxy that expresses object placement, camera framing, and timing.</p>
-        <p>The frozen video model receives both the source and the proxy. Early-step guidance establishes the edited structure, while the source continues to anchor the final video.</p>
-        <a class="text-link" href="assets/paper.pdf?v=b80cc9948b42" target="_blank" rel="noopener">Read the method in the paper <span aria-hidden="true">↗</span></a>
+        <p>Video2Code estimates the source scene. Next-code prediction expresses the requested edit as its successor program. Code2Video renders that program into a proxy and uses it to guide video synthesis.</p>
+        <p>Our training-free prototype jointly realizes reconstruction and program editing in one coding-agent session. The frozen video model receives the source and edited proxy, with proxy guidance limited to the first five steps.</p>
+        <a class="text-link" href="assets/paper.pdf?v=cb25e44f46bf" target="_blank" rel="noopener">Read the method in the paper <span aria-hidden="true">↗</span></a>
       </div>
       <div class="method-visual">
         <div class="process-flow">
-          <div class="process-item"><span>01</span><b>Observe</b><small>Source + edit request</small></div>
+          <div class="process-item"><span>01</span><b>Video2Code</b><small>Estimate the source scene</small></div>
           <svg viewBox="0 0 32 16" aria-hidden="true"><path d="M1 8h27m-6-6 6 6-6 6"/></svg>
-          <div class="process-item"><span>02</span><b>Execute</b><small>Scene program → proxy</small></div>
+          <div class="process-item"><span>02</span><b>Next-code</b><small>Predict the edited program</small></div>
           <svg viewBox="0 0 32 16" aria-hidden="true"><path d="M1 8h27m-6-6 6 6-6 6"/></svg>
-          <div class="process-item"><span>03</span><b>Synthesize</b><small>Source + proxy → video</small></div>
+          <div class="process-item"><span>03</span><b>Code2Video</b><small>Render → guide synthesis</small></div>
         </div>
         <div class="conditioning"><div class="conditioning-title"><b>Early-step conditioning</b><span>20 sampling steps</span></div>
           <div class="conditioning-row"><span>Source</span><div class="step-track source-track" aria-label="Source active in all twenty steps"></div><b>20 / 20</b></div>
