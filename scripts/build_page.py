@@ -2,6 +2,7 @@
 """Build the complete, buildless research page from reviewed content and media."""
 
 from html import escape
+from hashlib import sha256
 import json
 from pathlib import Path
 
@@ -62,7 +63,10 @@ def main() -> None:
         </section>''')
     template = (ROOT / "index.template.html").read_text()
     assert template.count("{{SHOWCASES}}") == 1
-    (DIST / "index.html").write_text(template.replace("{{SHOWCASES}}", "\n".join(sections)))
+    paper_version = sha256((DIST / "assets/paper.pdf").read_bytes()).hexdigest()[:12]
+    html = template.replace("{{SHOWCASES}}", "\n".join(sections))
+    html = html.replace('href="assets/paper.pdf"', f'href="assets/paper.pdf?v={paper_version}"')
+    (DIST / "index.html").write_text(html)
     print(f"Built {len(sections)} task sections, {sum(len(c['cases']) for c in content['categories'])} complete comparisons.")
 
 
