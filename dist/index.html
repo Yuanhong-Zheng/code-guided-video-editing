@@ -16,7 +16,7 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=779daa864c76">
+  <link rel="stylesheet" href="styles.css?v=927dbf6a1883">
   <script src="app.js?v=ef057b1a4a24" defer></script>
 </head>
 <body>
@@ -621,26 +621,21 @@
       </div>
     </section>
 
-    <section id="method" class="method-section container">
-      <div class="method-copy"><p class="eyebrow">THE IDEA</p><h2>A visible plan.<br>An editable program.</h2>
-        <p>Video2Code estimates the source scene. Next-code prediction expresses the requested edit as its successor program. Code2Video renders that program into a proxy and uses it to guide video synthesis.</p>
-        <p>Our training-free prototype jointly realizes reconstruction and program editing in one coding-agent session. The frozen video model receives the source and edited proxy, with proxy guidance limited to the first five steps.</p>
-        <a class="text-link" href="assets/paper.pdf?v=cb25e44f46bf" target="_blank" rel="noopener">Read the method in the paper <span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="method-visual">
-        <div class="process-flow">
-          <div class="process-item"><span>01</span><b>Video2Code</b><small>Estimate the source scene</small></div>
-          <svg viewBox="0 0 32 16" aria-hidden="true"><path d="M1 8h27m-6-6 6 6-6 6"/></svg>
-          <div class="process-item"><span>02</span><b>Next-code</b><small>Predict the edited program</small></div>
-          <svg viewBox="0 0 32 16" aria-hidden="true"><path d="M1 8h27m-6-6 6 6-6 6"/></svg>
-          <div class="process-item"><span>03</span><b>Code2Video</b><small>Render → guide synthesis</small></div>
-        </div>
-        <div class="conditioning"><div class="conditioning-title"><b>Early-step conditioning</b><span>20 sampling steps</span></div>
-          <div class="conditioning-row"><span>Source</span><div class="step-track source-track" aria-label="Source active in all twenty steps"></div><b>20 / 20</b></div>
-          <div class="conditioning-row"><span>Proxy</span><div class="step-track proxy-track" aria-label="Proxy active in the first five steps"></div><b>5 / 20</b></div>
-          <div class="conditioning-axis"><span>Structure first</span><span>Continue with the source</span></div>
+    <section id="method" class="method-section container" aria-labelledby="method-title">
+      <div class="method-intro">
+        <div><p class="eyebrow">THE IDEA</p><h2 id="method-title">A visible plan.<br>An editable program.</h2></div>
+        <div class="method-copy">
+          <p>Video2Code estimates the source scene. Next-code prediction expresses the requested edit as its successor program. Code2Video renders that program into a proxy and uses it to guide video synthesis.</p>
+          <p>Our training-free prototype jointly realizes reconstruction and program editing in one coding-agent session. The frozen video model receives the source and edited proxy, with proxy guidance limited to the first five steps.</p>
+          <a class="text-link" href="assets/paper.pdf?v=cb25e44f46bf" target="_blank" rel="noopener">Read the method in the paper <span aria-hidden="true">↗</span></a>
         </div>
       </div>
+      <figure class="method-figure" id="method-figure">
+        <a class="method-figure-image" href="assets/method-overview.pdf?v=915a95edc4c1" target="_blank" rel="noopener" aria-label="Open the method figure as a full-resolution vector PDF">
+          <img src="assets/method-overview.webp?v=aea1f7f0737e" width="3000" height="1425" loading="lazy" decoding="async" alt="Video2Code, next-code prediction, and Code2Video: a source-grounded program is edited and rendered into a proxy. Frozen INT8 H3 uses the source for all 20 steps and the proxy for the first five steps.">
+        </a>
+        <figcaption><p><b>Figure 2 from the paper.</b> The source reference and edit instruction remain active throughout; the edited proxy guides only the first five steps.</p><a href="assets/method-overview.pdf?v=915a95edc4c1" target="_blank" rel="noopener">Full-resolution PDF <span aria-hidden="true">↗</span></a></figcaption>
+      </figure>
     </section>
 
     <section class="citation-section container">

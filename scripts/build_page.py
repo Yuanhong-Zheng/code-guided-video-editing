@@ -68,7 +68,13 @@ def main() -> None:
     html = template.replace("{{SHOWCASES}}", "\n".join(sections))
     html = html.replace("{{CASE_COUNT}}", str(sum(len(c["cases"]) for c in content["categories"])))
     html = html.replace("{{CATEGORY_COUNT}}", str(len(content["categories"])))
-    for name, attribute in [("assets/paper.pdf", "href"), ("styles.css", "href"), ("app.js", "src")]:
+    for name, attribute in [
+        ("assets/paper.pdf", "href"),
+        ("assets/method-overview.pdf", "href"),
+        ("assets/method-overview.webp", "src"),
+        ("styles.css", "href"),
+        ("app.js", "src"),
+    ]:
         version = sha256((DIST / name).read_bytes()).hexdigest()[:12]
         html = html.replace(f'{attribute}="{name}"', f'{attribute}="{name}?v={version}"')
     (DIST / "index.html").write_text(html)

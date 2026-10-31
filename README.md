@@ -21,6 +21,10 @@ and 20 sampling steps. The source remains active throughout. The guided group
 adds the edited proxy for steps 1–5. These are selected qualitative examples,
 not an aggregate benchmark evaluation.
 
+The method section displays Figure 2 from the paper as a 3000-pixel-wide,
+lossless WebP export. Both the image and its caption link to the original
+vector PDF for full-resolution viewing.
+
 ## Editing and previewing
 
 The site is buildless HTML, CSS, and JavaScript, with self-hosted fonts and media.
