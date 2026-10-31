@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+"""Check the expanded gallery, local assets, and frozen media provenance."""
+
+from hashlib import sha256
+from html.parser import HTMLParser
+import json
+from pathlib import Path
+import re
+from urllib.parse import unquote, urlsplit
+
+ROOT = Path(__file__).resolve().parents[1]
+DIST = ROOT / "dist"
+
+
+class Page(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.elements = []
+
+    def handle_starttag(self, tag, attrs):
+        self.elements.append((tag, dict(attrs)))
+
+
+def require(value, message):
+    if not value:
+        raise AssertionError(message)
+
+
+def main():
+    source = (DIST / "index.html").read_text()
+    page = Page()
+    page.feed(source)
+    content = json.loads((ROOT / "content.json").read_text())
+    media = json.loads((DIST / "data/media.json").read_text())
+    provenance = json.loads((DIST / "data/media-provenance.json").read_text())
+    categories = content["categories"]
+    cases = [case for category in categories for case in category["cases"]]
+    ids = [attrs["id"] for _, attrs in page.elements if "id" in attrs]
+    require(len(ids) == len(set(ids)), "Duplicate HTML IDs")
+    require(len(categories) == 8 and len(cases) == 16, "Expected eight tasks and sixteen cases")
+    require(set(media["cases"]) == {case["id"] for case in cases}, "Media case mismatch")
+    for category in categories:
+        require(len(category["cases"]) == 2, "Expected two cases per task")
+        require(category["id"] in ids, "Task section is missing")
+        for case in category["cases"]:
+            require(f"case-{case['id']}" in ids, "Expanded case is missing")
+    videos = [attrs for tag, attrs in page.elements if tag == "video"]
+    require(len(videos) == 64, "Expected four video elements per case")
+    for attrs in videos:
+        require("src" not in attrs, "Video eagerly acquires a source")
+        require(all(key in attrs for key in ["muted", "playsinline", "loop", "data-src"]), "Playback attributes missing")
+        require(attrs.get("preload") == "none", "Video preload must be none before activation")
+    require(not any(tag == "select" or attrs.get("role") == "tab" for tag, attrs in page.elements), "Gallery must have no case/category selector")
+    for _, attrs in page.elements:
+        for key in ["href", "src", "data-src"]:
+            value = attrs.get(key)
+            if not value:
+                continue
+            url = urlsplit(value)
+            if url.scheme or url.netloc:
+                require(url.scheme == "https", f"Unexpected external URL scheme: {url.scheme}")
+                continue
+            if url.path:
+                path = (DIST / unquote(url.path)).resolve()
+                require(path.is_relative_to(DIST), "Asset escapes published directory")
+                require(path.is_file(), f"Missing published file: {url.path}")
+            elif url.fragment:
+                require(url.fragment in ids, f"Unresolved page anchor: {url.fragment}")
+    for cid, case in provenance["cases"].items():
+        guided = case["conditioning_validation"]["with-proxy"]
+        require(guided["proxy_condition_steps"] == list(range(1, 6)), f"Wrong proxy schedule: {cid}")
+        require(guided["source_condition_steps"] == list(range(1, 21)), f"Wrong source schedule: {cid}")
+        require(guided["actual_sampling_trace_verified"], f"Unverified early-step trace: {cid}")
+        for item in case["media"]:
+            video = DIST / item["src"]
+            require(sha256(video.read_bytes()).hexdigest() == item["published_file_sha256"], f"Video changed: {item['src']}")
+            require(item["source_video_packet_sha256"] == item["published_video_packet_sha256"], "Encoded video content changed")
+            require(item["all_encoded_streams_preserved"] and item["faststart"], "Invalid remux")
+            require((item["width"], item["height"], item["fps"]) == (960, 544, 24), "Incorrect video geometry or FPS")
+            poster = item["poster"]
+            require(sha256((DIST / poster["src"]).read_bytes()).hexdigest() == poster["sha256"], "Poster changed")
+    # Runtime artifacts and private infrastructure must never enter the site.
+    private_patterns = [r"/ytech[^\s\"']+", r"\b(?:olp_|gho_)[A-Za-z0-9]{12,}", r"\b(?:sk-|AIza)[A-Za-z0-9_-]{16,}", r"https?://(?:10\.|127\.|localhost)"]
+    for path in DIST.rglob("*"):
+        if path.suffix in {".html", ".js", ".css", ".json", ".svg"}:
+            text = path.read_text()
+            require(not any(re.search(pattern, text) for pattern in private_patterns), f"Private data in {path.relative_to(DIST)}")
+    size = sum(path.stat().st_size for path in DIST.rglob("*") if path.is_file())
+    print(json.dumps({"categories": 8, "cases": 16, "videos": 64, "verified_media": True, "published_bytes": size, "all_cases_expanded": True}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,427 @@
+{
+  "experiment": {
+    "id": "openve_h3_int8_early_step_20261031",
+    "steps": 20,
+    "proxy_steps": 5,
+    "seed": 42,
+    "fps": 24
+  },
+  "cases": {
+    "0350": {
+      "duration": 5.041666666666667,
+      "frames": 121,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0350/source.mp4",
+          "poster": "assets/cases/0350/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0350/proxy.mp4",
+          "poster": "assets/cases/0350/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0350/without-proxy.mp4",
+          "poster": "assets/cases/0350/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0350/with-proxy.mp4",
+          "poster": "assets/cases/0350/with-proxy.jpg"
+        }
+      ]
+    },
+    "0355": {
+      "duration": 5.041666666666667,
+      "frames": 121,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0355/source.mp4",
+          "poster": "assets/cases/0355/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0355/proxy.mp4",
+          "poster": "assets/cases/0355/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0355/without-proxy.mp4",
+          "poster": "assets/cases/0355/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0355/with-proxy.mp4",
+          "poster": "assets/cases/0355/with-proxy.jpg"
+        }
+      ]
+    },
+    "0292": {
+      "duration": 3.0416666666666665,
+      "frames": 73,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0292/source.mp4",
+          "poster": "assets/cases/0292/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0292/proxy.mp4",
+          "poster": "assets/cases/0292/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0292/without-proxy.mp4",
+          "poster": "assets/cases/0292/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0292/with-proxy.mp4",
+          "poster": "assets/cases/0292/with-proxy.jpg"
+        }
+      ]
+    },
+    "0246": {
+      "duration": 3.2083333333333335,
+      "frames": 77,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0246/source.mp4",
+          "poster": "assets/cases/0246/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0246/proxy.mp4",
+          "poster": "assets/cases/0246/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0246/without-proxy.mp4",
+          "poster": "assets/cases/0246/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0246/with-proxy.mp4",
+          "poster": "assets/cases/0246/with-proxy.jpg"
+        }
+      ]
+    },
+    "0089": {
+      "duration": 3.5416666666666665,
+      "frames": 85,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0089/source.mp4",
+          "poster": "assets/cases/0089/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0089/proxy.mp4",
+          "poster": "assets/cases/0089/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0089/without-proxy.mp4",
+          "poster": "assets/cases/0089/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0089/with-proxy.mp4",
+          "poster": "assets/cases/0089/with-proxy.jpg"
+        }
+      ]
+    },
+    "0111": {
+      "duration": 4.208333333333333,
+      "frames": 101,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0111/source.mp4",
+          "poster": "assets/cases/0111/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0111/proxy.mp4",
+          "poster": "assets/cases/0111/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0111/without-proxy.mp4",
+          "poster": "assets/cases/0111/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0111/with-proxy.mp4",
+          "poster": "assets/cases/0111/with-proxy.jpg"
+        }
+      ]
+    },
+    "0211": {
+      "duration": 2.1666666666666665,
+      "frames": 52,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0211/source.mp4",
+          "poster": "assets/cases/0211/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0211/proxy.mp4",
+          "poster": "assets/cases/0211/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0211/without-proxy.mp4",
+          "poster": "assets/cases/0211/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0211/with-proxy.mp4",
+          "poster": "assets/cases/0211/with-proxy.jpg"
+        }
+      ]
+    },
+    "0189": {
+      "duration": 4.833333333333333,
+      "frames": 116,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0189/source.mp4",
+          "poster": "assets/cases/0189/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0189/proxy.mp4",
+          "poster": "assets/cases/0189/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0189/without-proxy.mp4",
+          "poster": "assets/cases/0189/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0189/with-proxy.mp4",
+          "poster": "assets/cases/0189/with-proxy.jpg"
+        }
+      ]
+    },
+    "0166": {
+      "duration": 3.0833333333333335,
+      "frames": 74,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0166/source.mp4",
+          "poster": "assets/cases/0166/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0166/proxy.mp4",
+          "poster": "assets/cases/0166/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0166/without-proxy.mp4",
+          "poster": "assets/cases/0166/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0166/with-proxy.mp4",
+          "poster": "assets/cases/0166/with-proxy.jpg"
+        }
+      ]
+    },
+    "0156": {
+      "duration": 2.8333333333333335,
+      "frames": 68,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0156/source.mp4",
+          "poster": "assets/cases/0156/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0156/proxy.mp4",
+          "poster": "assets/cases/0156/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0156/without-proxy.mp4",
+          "poster": "assets/cases/0156/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0156/with-proxy.mp4",
+          "poster": "assets/cases/0156/with-proxy.jpg"
+        }
+      ]
+    },
+    "0318": {
+      "duration": 5.041666666666667,
+      "frames": 121,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0318/source.mp4",
+          "poster": "assets/cases/0318/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0318/proxy.mp4",
+          "poster": "assets/cases/0318/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0318/without-proxy.mp4",
+          "poster": "assets/cases/0318/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0318/with-proxy.mp4",
+          "poster": "assets/cases/0318/with-proxy.jpg"
+        }
+      ]
+    },
+    "0332": {
+      "duration": 5.041666666666667,
+      "frames": 121,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0332/source.mp4",
+          "poster": "assets/cases/0332/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0332/proxy.mp4",
+          "poster": "assets/cases/0332/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0332/without-proxy.mp4",
+          "poster": "assets/cases/0332/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0332/with-proxy.mp4",
+          "poster": "assets/cases/0332/with-proxy.jpg"
+        }
+      ]
+    },
+    "0041": {
+      "duration": 4.041666666666667,
+      "frames": 97,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0041/source.mp4",
+          "poster": "assets/cases/0041/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0041/proxy.mp4",
+          "poster": "assets/cases/0041/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0041/without-proxy.mp4",
+          "poster": "assets/cases/0041/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0041/with-proxy.mp4",
+          "poster": "assets/cases/0041/with-proxy.jpg"
+        }
+      ]
+    },
+    "0055": {
+      "duration": 2.7083333333333335,
+      "frames": 65,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0055/source.mp4",
+          "poster": "assets/cases/0055/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0055/proxy.mp4",
+          "poster": "assets/cases/0055/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0055/without-proxy.mp4",
+          "poster": "assets/cases/0055/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0055/with-proxy.mp4",
+          "poster": "assets/cases/0055/with-proxy.jpg"
+        }
+      ]
+    },
+    "0405": {
+      "duration": 2.7083333333333335,
+      "frames": 65,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0405/source.mp4",
+          "poster": "assets/cases/0405/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0405/proxy.mp4",
+          "poster": "assets/cases/0405/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0405/without-proxy.mp4",
+          "poster": "assets/cases/0405/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0405/with-proxy.mp4",
+          "poster": "assets/cases/0405/with-proxy.jpg"
+        }
+      ]
+    },
+    "0395": {
+      "duration": 2.2083333333333335,
+      "frames": 53,
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0395/source.mp4",
+          "poster": "assets/cases/0395/source.jpg"
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0395/proxy.mp4",
+          "poster": "assets/cases/0395/proxy.jpg"
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0395/without-proxy.mp4",
+          "poster": "assets/cases/0395/without-proxy.jpg"
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0395/with-proxy.mp4",
+          "poster": "assets/cases/0395/with-proxy.jpg"
+        }
+      ]
+    }
+  }
+}
