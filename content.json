@@ -116,8 +116,8 @@
     },
     {
       "id": "subtitle_edit",
-      "title": "Subtitle removal",
-      "description": "Express the underlying scene without text and retain its visual context.",
+      "title": "Subtitle editing",
+      "description": "Add, replace, or remove on-screen text while retaining the source scene.",
       "cases": [
         {
           "id": "0405",
@@ -126,10 +126,10 @@
           "observation": "The no-proxy output retains the top caption. The guided result removes the band while retaining the landscape."
         },
         {
-          "id": "0395",
-          "title": "Clean frames for an animated scene",
-          "edit": "Remove the subtitles from the animated scene.",
-          "observation": "Subtitle text remains in the baseline; the proxy-guided output removes the overlay."
+          "id": "0413",
+          "title": "Add a line to the night skyline",
+          "edit": "Add \"Beneath a starless sky, city lights hum a quiet lullaby.\" at the bottom in white text with a black outline.",
+          "observation": "The baseline prints the instruction word \"Add\" and uses black text on a filled white banner. The guided result adds the intended sentence as white outlined text."
         }
       ]
     }

@@ -293,29 +293,29 @@
         }
       ]
     },
-    "0395": {
-      "duration": 2.2083333333333335,
-      "frames": 53,
+    "0413": {
+      "duration": 2.7083333333333335,
+      "frames": 65,
       "media": [
         {
           "role": "source",
-          "src": "assets/cases/0395/source.mp4",
-          "poster": "assets/cases/0395/source.jpg"
+          "src": "assets/cases/0413/source.mp4",
+          "poster": "assets/cases/0413/source.jpg"
         },
         {
           "role": "proxy",
-          "src": "assets/cases/0395/proxy.mp4",
-          "poster": "assets/cases/0395/proxy.jpg"
+          "src": "assets/cases/0413/proxy.mp4",
+          "poster": "assets/cases/0413/proxy.jpg"
         },
         {
           "role": "without-proxy",
-          "src": "assets/cases/0395/without-proxy.mp4",
-          "poster": "assets/cases/0395/without-proxy.jpg"
+          "src": "assets/cases/0413/without-proxy.mp4",
+          "poster": "assets/cases/0413/without-proxy.jpg"
         },
         {
           "role": "with-proxy",
-          "src": "assets/cases/0395/with-proxy.mp4",
-          "poster": "assets/cases/0395/with-proxy.jpg"
+          "src": "assets/cases/0413/with-proxy.mp4",
+          "poster": "assets/cases/0413/with-proxy.jpg"
         }
       ]
     }
