@@ -1,102 +1,106 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{LANG}}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f8f8f3">
-  <title>Code-Guided Video Editing · Yuanhong Zheng</title>
-  <meta name="description" content="An executable plan for editing an existing video. Explore {{CASE_COUNT}} selected comparisons, with source, proxy, and matched H3 outputs side by side.">
-  <link rel="canonical" href="https://yuanhong-zheng.github.io/code-guided-video-editing/">
+  <title>{{PAGE_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <link rel="alternate" hreflang="en" href="{{EN_CANONICAL}}">
+  <link rel="alternate" hreflang="zh-CN" href="{{ZH_CANONICAL}}">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Code-Guided Video Editing with Source-Grounded Executable Proxies">
-  <meta property="og:description" content="Source video. Executable proxy. Generative edit. Explore eight editing tasks in four synchronized views.">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{OG_DESCRIPTION}}">
   <meta property="og:image" content="https://yuanhong-zheng.github.io/code-guided-video-editing/assets/social.jpg">
-  <meta property="og:url" content="https://yuanhong-zheng.github.io/code-guided-video-editing/">
+  <meta property="og:url" content="{{CANONICAL}}">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
+  <script type="application/json" id="ui-copy">{{RUNTIME_COPY}}</script>
   <script src="app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#results">Skip to video comparisons</a>
+  <a class="skip-link" href="#results">{{SKIP_LINK}}</a>
   <header class="site-header">
-    <nav class="nav-shell" aria-label="Main navigation">
-      <a class="wordmark" href="#top" aria-label="Code-Guided Video Editing home">
+    <nav class="nav-shell" aria-label="{{NAV_LABEL}}">
+      <a class="wordmark" href="#top" aria-label="{{HOME_LABEL}}">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 10v12l-12 7L4 22V10Z"/><path d="m4 10 12 7 12-7M16 17v12"/><path class="mark-play" d="m13 9 7 4-7 4Z"/></svg>
-        <span>CODE-GUIDED <b>VIDEO EDITING</b></span>
+        <span>{{WORDMARK_TOP}} <b>{{WORDMARK_BOTTOM}}</b></span>
       </a>
       <div class="nav-links">
-        <a href="#results">Results</a>
-        <a href="#method">How it works</a>
-        <a href="assets/paper.pdf" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+        <a href="#method">{{NAV_METHOD}}</a>
+        <a href="#results">{{NAV_RESULTS}}</a>
+        <a class="nav-paper" href="assets/paper.pdf" target="_blank" rel="noopener">{{NAV_PAPER}} <span aria-hidden="true">↗</span></a>
+        {{LANGUAGE_SWITCH}}
       </div>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="hero-kicker"><span></span> A training-free video editing project</div>
-      <h1>Code-Guided Video Editing<br><span class="title-connector">with</span> <em>Source-Grounded</em><br>Executable Proxies</h1>
-      <div class="author-line"><a href="https://github.com/Yuanhong-Zheng">Yuanhong Zheng</a><span>Peking University</span></div>
-      <p class="hero-description">Turn an editing instruction into a plan you can inspect.<br class="desktop-break"> A scene program makes the edit explicit; a video model brings it to life.</p>
+      <div class="hero-kicker"><span></span> {{HERO_KICKER}}</div>
+      <h1>{{HERO_TITLE_HTML}}</h1>
+      <div class="author-line"><a href="https://github.com/Yuanhong-Zheng">{{AUTHOR}}</a><span>{{AFFILIATION}}</span></div>
+      <p class="hero-description">{{HERO_DESCRIPTION_HTML}}</p>
       <div class="hero-actions">
-        <a class="button button-primary" href="#results">Explore the results <span aria-hidden="true">↓</span></a>
-        <a class="button button-paper" href="assets/paper.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2h7l4 4v12H5Z"/><path d="M12 2v5h4M8 10h5M8 13h5"/></svg> Read the paper</a>
+        <a class="button button-primary" href="#results">{{EXPLORE_RESULTS}} <span aria-hidden="true">↓</span></a>
+        <a class="button button-paper" href="assets/paper.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2h7l4 4v12H5Z"/><path d="M12 2v5h4M8 10h5M8 13h5"/></svg> {{READ_PAPER}}</a>
         <a class="button button-quiet" href="https://github.com/Yuanhong-Zheng/code-guided-video-editing" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="hero-facts" aria-label="Gallery contents">
-        <span><b>{{CATEGORY_COUNT}}</b> editing tasks</span><i></i><span><b>{{CASE_COUNT}}</b> selected comparisons</span><i></i><span><b>4</b> aligned views</span>
-      </div>
-    </section>
-
-    <section id="results" class="results-section">
-      <div class="section-intro container">
-        <div><p class="eyebrow">SEE THE EDIT. INSPECT THE PLAN.</p><h2>Four views. One editing request.</h2></div>
-        <p>Original footage, the executable proxy, and two matched H3 outputs.<br>Every task is shown below. Scroll to watch the comparisons.</p>
-      </div>
-      <div class="comparison-key container">
-        <span><i class="dot-source"></i> Source video</span>
-        <span><i class="dot-proxy"></i> Executable proxy</span>
-        <span><i class="dot-baseline"></i> Without proxy</span>
-        <span><i class="dot-guided"></i> With proxy <small>early-step</small></span>
-      </div>
-      {{SHOWCASES}}
-      <div class="gallery-note container">
-        <span class="note-line"></span>
-        <p>Selected OpenVE-Bench comparisons with visible improvements from proxy guidance. Both output groups use the same frozen INT8 MiniMax-H3 model, seed 42, and 20 sampling steps. The source remains active throughout; the edited proxy is used only in the first five steps. Edit descriptions are abbreviated for readability.</p>
+      <div class="hero-facts" aria-label="{{GALLERY_CONTENTS}}">
+        <span><b>{{CATEGORY_COUNT}}</b> {{TASK_COUNT}}</span><i></i><span><b>{{CASE_COUNT}}</b> {{CASE_COUNT_LABEL}}</span><i></i><span><b>4</b> {{VIEW_COUNT}}</span>
       </div>
     </section>
 
     <section id="method" class="method-section container" aria-labelledby="method-title">
       <div class="method-intro">
-        <div><p class="eyebrow">THE IDEA</p><h2 id="method-title">A visible plan.<br>An editable program.</h2></div>
+        <div><p class="eyebrow">{{METHOD_EYEBROW}}</p><h2 id="method-title">{{METHOD_TITLE_HTML}}</h2></div>
         <div class="method-copy">
-          <p>Video2Code estimates the source scene. Next-code prediction expresses the requested edit as its successor program. Code2Video renders that program into a proxy and uses it to guide video synthesis.</p>
-          <p>Our training-free prototype jointly realizes reconstruction and program editing in one coding-agent session. The frozen video model receives the source and edited proxy, with proxy guidance limited to the first five steps.</p>
-          <a class="text-link" href="assets/paper.pdf" target="_blank" rel="noopener">Read the method in the paper <span aria-hidden="true">↗</span></a>
+          <p>{{METHOD_PARAGRAPH}}</p>
+          <p>{{METHOD_PROTOTYPE}}</p>
+          <a class="text-link" href="assets/paper.pdf" target="_blank" rel="noopener">{{METHOD_PAPER_LINK}} <span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <figure class="method-figure" id="method-figure">
-        <a class="method-figure-image" href="assets/method-overview.pdf" target="_blank" rel="noopener" aria-label="Open the method figure as a full-resolution vector PDF">
-          <img src="assets/method-overview.webp" width="3000" height="1425" loading="lazy" decoding="async" alt="Video2Code, next-code prediction, and Code2Video: a source-grounded program is edited and rendered into a proxy. Frozen INT8 H3 uses the source for all 20 steps and the proxy for the first five steps.">
+        <a class="method-figure-image" href="assets/method-overview.pdf" target="_blank" rel="noopener" aria-label="{{FIGURE_OPEN}}">
+          <img src="assets/method-overview.webp" width="3000" height="1425" loading="lazy" decoding="async" alt="{{FIGURE_ALT}}">
         </a>
-        <figcaption><p><b>Figure 2 from the paper.</b> The source reference and edit instruction remain active throughout; the edited proxy guides only the first five steps.</p><a href="assets/method-overview.pdf" target="_blank" rel="noopener">Full-resolution PDF <span aria-hidden="true">↗</span></a></figcaption>
+        <figcaption><p><b>{{FIGURE_CAPTION_TITLE}}</b> {{FIGURE_CAPTION}}</p><a href="assets/method-overview.pdf" target="_blank" rel="noopener">{{FIGURE_PDF}} <span aria-hidden="true">↗</span></a></figcaption>
       </figure>
     </section>
 
+    <section id="results" class="results-section">
+      <div class="section-intro container">
+        <div><p class="eyebrow">{{RESULTS_EYEBROW}}</p><h2>{{RESULTS_TITLE}}</h2></div>
+        <p>{{RESULTS_DESCRIPTION_HTML}}</p>
+      </div>
+      <div class="comparison-key container">
+        <span><i class="dot-source"></i> {{SOURCE}}</span>
+        <span><i class="dot-proxy"></i> {{PROXY}}</span>
+        <span><i class="dot-baseline"></i> {{WITHOUT_PROXY}}</span>
+        <span><i class="dot-guided"></i> {{WITH_PROXY}} <small>{{EARLY_STEP}}</small></span>
+      </div>
+      {{SHOWCASES}}
+      <div class="gallery-note container">
+        <span class="note-line"></span>
+        <p>{{GALLERY_NOTE}}</p>
+      </div>
+    </section>
+
     <section class="citation-section container">
-      <div><p class="eyebrow">REFERENCE</p><h2>Cite this work</h2><p>Yuanhong Zheng. <em>Code-Guided Video Editing with Source-Grounded Executable Proxies.</em> Technical report, 2026.</p></div>
-      <button type="button" class="button button-paper" id="copy-citation">Copy BibTeX <span aria-hidden="true">↗</span></button>
+      <div><p class="eyebrow">{{CITATION_EYEBROW}}</p><h2>{{CITATION_TITLE}}</h2><p>{{CITATION_HTML}}</p></div>
+      <button type="button" class="button button-paper" id="copy-citation">{{COPY_CITATION}} <span aria-hidden="true">↗</span></button>
     </section>
   </main>
   <footer class="site-footer container">
-    <div><a class="footer-name" href="#top">Code-Guided Video Editing</a><p>Yuanhong Zheng · Peking University</p></div>
-    <div class="credits"><p>Source clips and editing tasks: <a href="https://github.com/OpenVE-Team/OpenVE-3M" target="_blank" rel="noopener">OpenVE-Bench</a></p><p>Built on <a href="https://code-video-model.github.io/" target="_blank" rel="noopener">Code Video Model</a> and <a href="https://github.com/MiniMax-AI/MiniMax-H3" target="_blank" rel="noopener">MiniMax-H3</a>.</p></div>
-    <a class="back-top" href="#top">Back to top ↑</a>
+    <div><a class="footer-name" href="#top">{{FOOTER_NAME}}</a><p>{{AUTHOR}} · {{AFFILIATION}}</p></div>
+    <div class="credits"><p>{{SOURCE_CREDIT}} <a href="https://github.com/OpenVE-Team/OpenVE-3M" target="_blank" rel="noopener">OpenVE-Bench</a></p><p>{{BUILT_ON}} <a href="https://code-video-model.github.io/" target="_blank" rel="noopener">Code Video Model</a> {{AND}} <a href="https://github.com/MiniMax-AI/MiniMax-H3" target="_blank" rel="noopener">MiniMax-H3</a>.</p></div>
+    <a class="back-top" href="#top">{{BACK_TOP}} ↑</a>
   </footer>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <noscript><p class="noscript-note">Video comparisons use JavaScript for synchronized playback. Each view also has a direct video link.</p></noscript>
+  <noscript><p class="noscript-note">{{NOSCRIPT}}</p></noscript>
 </body>
 </html>

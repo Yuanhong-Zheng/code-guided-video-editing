@@ -21,15 +21,17 @@ and 20 sampling steps. The source remains active throughout. The guided group
 adds the edited proxy for steps 1–5. These are selected qualitative examples,
 not an aggregate benchmark evaluation.
 
-The method section displays Figure 2 from the paper as a 3000-pixel-wide,
+The method section precedes the results gallery and displays Figure 2 from the paper as a 3000-pixel-wide,
 lossless WebP export. Both the image and its caption link to the original
-vector PDF for full-resolution viewing.
+vector PDF for full-resolution viewing. The header provides an EN / 中文 switch,
+with English at `index.html` and Chinese at `zh.html`. Switching preserves the
+current anchor. Both editions share the same video and figure assets.
 
 ## Editing and previewing
 
 The site is buildless HTML, CSS, and JavaScript, with self-hosted fonts and media.
-Update `content.json` for the reviewed descriptions, `index.template.html` for
-page structure, and `dist/styles.css` / `dist/app.js` for presentation and behavior.
+Update `content.json` / `content.zh.json` for the reviewed English / Chinese
+descriptions, `locales/` for interface copy, `index.template.html` for page structure, and `dist/styles.css` / `dist/app.js` for presentation and behavior.
 
 ```sh
 python3 scripts/build_page.py
@@ -38,7 +40,7 @@ python3 scripts/serve.py
 ```
 
 Open `http://localhost:8000`. The build writes all selected case cards directly into
-`dist/index.html`; JavaScript is only used for playback and clipboard behavior.
+`dist/index.html` and `dist/zh.html`; JavaScript is only used for playback and clipboard behavior.
 Pushes to `main` deploy `dist/` through the GitHub Pages workflow.
 
 ## Media provenance
@@ -56,3 +58,9 @@ The program-and-render workflow builds on [Code Video Model](https://github.com/
 and synthesis uses [MiniMax-H3](https://github.com/MiniMax-AI/MiniMax-H3).
 Font licenses are included alongside the self-hosted Inter and Newsreader fonts.
 Media and research artifacts retain their applicable upstream terms.
+
+Chinese text uses a self-hosted Noto Sans SC subset (SIL OFL; license included).
+After adding Chinese copy, regenerate it with `scripts/prepare_chinese_font.py`
+using a local Noto Sans SC variable TTF and the upstream OFL file. This optional
+asset-preparation step needs fontTools and Brotli; normal builds use the tracked WOFF2.
+Font source: https://github.com/google/fonts/tree/main/ofl/notosanssc.

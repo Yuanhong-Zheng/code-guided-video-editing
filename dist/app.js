@@ -1,6 +1,15 @@
 /* Four aligned views per case; only nearby cases acquire media sources. */
 "use strict";
 
+const messages = JSON.parse(document.getElementById("ui-copy").textContent);
+function syncLanguageLinks() {
+  document.querySelectorAll("[data-language-page]").forEach(link => {
+    link.href = link.dataset.languagePage + location.hash;
+  });
+}
+syncLanguageLinks();
+addEventListener("hashchange", syncLanguageLinks);
+
 const PLAY_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg>';
 const PAUSE_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h3v12H4zM10 2h3v12h-3z"/></svg>';
 const clamp = (x, lo, hi) => Math.min(hi, Math.max(lo, x));
@@ -179,8 +188,8 @@ class Comparison {
 
   renderControls() {
     const active = !this.userPaused && this.visible && !this.failed;
-    this.playButton.innerHTML = `${active ? PAUSE_ICON : PLAY_ICON}<span>${active ? "Pause" : "Play"}</span>`;
-    this.playButton.setAttribute("aria-label", `${active ? "Pause" : "Play"} all four videos`);
+    this.playButton.innerHTML = `${active ? PAUSE_ICON : PLAY_ICON}<span>${active ? messages.pause : messages.play}</span>`;
+    this.playButton.setAttribute("aria-label", active ? messages.pauseAll : messages.playAll);
     this.playButton.setAttribute("aria-pressed", String(active));
   }
 
@@ -188,7 +197,7 @@ class Comparison {
     const position = clamp(this.position, 0, this.duration);
     this.seek.value = position;
     this.seek.style.setProperty("--progress", `${100 * position / this.duration}%`);
-    this.timeLabel.textContent = `${position.toFixed(1)} / ${this.duration.toFixed(1)} s`;
+    this.timeLabel.textContent = `${position.toFixed(1)} / ${this.duration.toFixed(1)} ${messages.timeUnit}`;
   }
 }
 
@@ -245,12 +254,6 @@ if ("IntersectionObserver" in window) {
 }
 scheduleViewportUpdate();
 
-document.querySelectorAll(".step-track").forEach(track => {
-  const fragment = document.createDocumentFragment();
-  for (let i = 0; i < 20; i++) fragment.append(document.createElement("i"));
-  track.append(fragment);
-});
-
 const citation = `@misc{zheng2026codeguided,
   title = {Code-Guided Video Editing with Source-Grounded Executable Proxies},
   author = {Zheng, Yuanhong},
@@ -280,8 +283,8 @@ document.getElementById("copy-citation").addEventListener("click", async () => {
       field.remove();
       if (!copied) throw new Error("Clipboard unavailable");
     }
-    showToast("BibTeX copied to clipboard");
+    showToast(messages.clipboardSuccess);
   } catch {
-    showToast("Clipboard unavailable in this browser");
+    showToast(messages.clipboardError);
   }
 });

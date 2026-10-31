@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f8f3">
+  <title>代码引导的视频编辑 · Yuanhong Zheng</title>
+  <meta name="description" content="以可执行代理明确视频编辑方案。浏览 12 组精选案例，对比原视频、代理和两组 H3 生成结果。">
+  <link rel="canonical" href="https://yuanhong-zheng.github.io/code-guided-video-editing/zh.html">
+  <link rel="alternate" hreflang="en" href="https://yuanhong-zheng.github.io/code-guided-video-editing/">
+  <link rel="alternate" hreflang="zh-CN" href="https://yuanhong-zheng.github.io/code-guided-video-editing/zh.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="代码引导的视频编辑：以源视频为依据的可执行代理">
+  <meta property="og:description" content="原视频、可执行代理与生成结果。通过四路同步视频，展示八类视频编辑任务。">
+  <meta property="og:image" content="https://yuanhong-zheng.github.io/code-guided-video-editing/assets/social.jpg">
+  <meta property="og:url" content="https://yuanhong-zheng.github.io/code-guided-video-editing/zh.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=18f5598bc6af">
+  <script type="application/json" id="ui-copy">{"play": "播放", "pause": "暂停", "playAll": "播放全部四路视频", "pauseAll": "暂停全部四路视频", "timeUnit": "秒", "clipboardSuccess": "BibTeX 已复制到剪贴板", "clipboardError": "当前浏览器无法访问剪贴板"}</script>
+  <script src="app.js?v=366540b75a29" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#results">跳至视频对比</a>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="主导航">
+      <a class="wordmark" href="#top" aria-label="代码引导的视频编辑首页">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 10v12l-12 7L4 22V10Z"/><path d="m4 10 12 7 12-7M16 17v12"/><path class="mark-play" d="m13 9 7 4-7 4Z"/></svg>
+        <span>可执行代理 <b>代码引导的视频编辑</b></span>
+      </a>
+      <div class="nav-links">
+        <a href="#method">方法概览</a>
+        <a href="#results">案例展示</a>
+        <a class="nav-paper" href="assets/paper.pdf?v=cb25e44f46bf" target="_blank" rel="noopener">论文 <span aria-hidden="true">↗</span></a>
+        <div class="language-switch" role="group" aria-label="语言切换"><a href="index.html" data-language-page="index.html" hreflang="en" lang="en" aria-label="Switch to English">EN</a><a href="zh.html" data-language-page="zh.html" hreflang="zh-CN" lang="zh-CN" aria-label="切换为中文" aria-current="page">中文</a></div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-kicker"><span></span> 无需训练的视频编辑项目</div>
+      <h1>基于<em>源视频可执行代理</em>的<br>代码引导视频编辑</h1>
+      <div class="author-line"><a href="https://github.com/Yuanhong-Zheng">Yuanhong Zheng</a><span>北京大学</span></div>
+      <p class="hero-description">把编辑指令变成可查看、可修改的方案。<br class="desktop-break"> 用场景程序明确编辑内容，再由视频模型生成最终画面。</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#results">查看案例 <span aria-hidden="true">↓</span></a>
+        <a class="button button-paper" href="assets/paper.pdf?v=cb25e44f46bf" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2h7l4 4v12H5Z"/><path d="M12 2v5h4M8 10h5M8 13h5"/></svg> 阅读论文</a>
+        <a class="button button-quiet" href="https://github.com/Yuanhong-Zheng/code-guided-video-editing" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-facts" aria-label="展示内容">
+        <span><b>8</b> 类编辑任务</span><i></i><span><b>12</b> 组精选对比</span><i></i><span><b>4</b> 路同步视频</span>
+      </div>
+    </section>
+
+    <section id="method" class="method-section container" aria-labelledby="method-title">
+      <div class="method-intro">
+        <div><p class="eyebrow">方法概览</p><h2 id="method-title">看得见的方案。<br>可编辑的程序。</h2></div>
+        <div class="method-copy">
+          <p>Video2Code 估计源视频的场景；next-code prediction 将编辑要求表达为后继程序；Code2Video 执行修改后的程序，渲染代理并引导视频生成。</p>
+          <p>当前无需训练的原型在同一个编程代理会话中联合完成场景重建和程序编辑。冻结的视频模型同时接收原视频与编辑后的代理，代理仅在前 5 个去噪步骤中参与引导。</p>
+          <a class="text-link" href="assets/paper.pdf?v=cb25e44f46bf" target="_blank" rel="noopener">阅读论文中的方法说明 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figure class="method-figure" id="method-figure">
+        <a class="method-figure-image" href="assets/method-overview.pdf?v=915a95edc4c1" target="_blank" rel="noopener" aria-label="以高清矢量 PDF 查看方法图">
+          <img src="assets/method-overview.webp?v=aea1f7f0737e" width="3000" height="1425" loading="lazy" decoding="async" alt="论文的三阶段方法图：Video2Code、next-code prediction 和 Code2Video。以源视频为依据的程序经修改后渲染为代理；冻结的 INT8 H3 在全部 20 步中参考原视频，仅在前 5 步中参考代理。">
+        </a>
+        <figcaption><p><b>论文主方法图（图 2）。</b> 原视频参考与编辑指令全程参与，编辑后的代理仅在前 5 步提供引导。</p><a href="assets/method-overview.pdf?v=915a95edc4c1" target="_blank" rel="noopener">查看高清矢量 PDF <span aria-hidden="true">↗</span></a></figcaption>
+      </figure>
+    </section>
+
+    <section id="results" class="results-section">
+      <div class="section-intro container">
+        <div><p class="eyebrow">查看编辑效果，检查代理方案</p><h2>同一编辑指令，四路视频对比。</h2></div>
+        <p>原视频、可执行代理，以及两组使用相同参数的 H3 输出。<br>所有任务均在下方展开，向下滚动即可观看对比。</p>
+      </div>
+      <div class="comparison-key container">
+        <span><i class="dot-source"></i> 原视频</span>
+        <span><i class="dot-proxy"></i> 可执行代理</span>
+        <span><i class="dot-baseline"></i> 无代理</span>
+        <span><i class="dot-guided"></i> 有代理 <small>前 5 步引导</small></span>
+      </div>
+      <section class="task-section container" id="camera_edit" aria-labelledby="task-camera_edit">
+          <div class="task-heading"><span class="task-number" aria-hidden="true">01</span><div><h2 id="task-camera_edit">镜头编辑</h2><p>在合成最终视频前，先将目标构图呈现出来。</p></div></div>
+          <article class="case-card" id="case-0350" data-case-id="0350" data-duration="5.04166667" aria-labelledby="title-0350">
+    <div class="case-heading"><h3 id="title-0350">钟楼的更宽视角</h3><a class="case-id" href="#case-0350" aria-label="跳转至案例 0350">案例 0350 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>将钟楼画面改为全景构图。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0350/source.jpg" alt="原视频: 钟楼的更宽视角" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0350/source.mp4" aria-label="原视频: 钟楼的更宽视角" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0350/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 钟楼的更宽视角" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0350/proxy.jpg" alt="可执行代理: 钟楼的更宽视角" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0350/proxy.mp4" aria-label="可执行代理: 钟楼的更宽视角" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0350/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 钟楼的更宽视角" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0350/without-proxy.jpg" alt="无代理: 钟楼的更宽视角" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0350/without-proxy.mp4" aria-label="无代理: 钟楼的更宽视角" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0350/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 钟楼的更宽视角" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0350/with-proxy.jpg" alt="有代理: 钟楼的更宽视角" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0350/with-proxy.mp4" aria-label="有代理: 钟楼的更宽视角" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0350/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 钟楼的更宽视角" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0350 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="5.04166667" value="0" step="0.04166667" aria-label="调整案例 0350 全部四路视频的进度">
+      <span class="time-label">0.0 / 5.0 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果的构图仍接近源视频。代理引导结果展示了更多周围场景。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+<article class="case-card" id="case-0355" data-case-id="0355" data-duration="5.04166667" aria-labelledby="title-0355">
+    <div class="case-heading"><h3 id="title-0355">帆船周围的更多海面</h3><a class="case-id" href="#case-0355" aria-label="跳转至案例 0355">案例 0355 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>扩大取景范围，同时保留帆船。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0355/source.jpg" alt="原视频: 帆船周围的更多海面" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0355/source.mp4" aria-label="原视频: 帆船周围的更多海面" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0355/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 帆船周围的更多海面" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0355/proxy.jpg" alt="可执行代理: 帆船周围的更多海面" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0355/proxy.mp4" aria-label="可执行代理: 帆船周围的更多海面" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0355/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 帆船周围的更多海面" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0355/without-proxy.jpg" alt="无代理: 帆船周围的更多海面" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0355/without-proxy.mp4" aria-label="无代理: 帆船周围的更多海面" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0355/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 帆船周围的更多海面" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0355/with-proxy.jpg" alt="有代理: 帆船周围的更多海面" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0355/with-proxy.mp4" aria-label="有代理: 帆船周围的更多海面" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0355/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 帆船周围的更多海面" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0355 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="5.04166667" value="0" step="0.04166667" aria-label="调整案例 0355 全部四路视频的进度">
+      <span class="time-label">0.0 / 5.0 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果仍采用近景构图，船帆被裁切。代理引导结果展示了完整帆船和更多周围海面。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+        </section>
+<section class="task-section container" id="local_add" aria-labelledby="task-local_add">
+          <div class="task-heading"><span class="task-number" aria-hidden="true">02</span><div><h2 id="task-local_add">物体添加</h2><p>为原有镜头中的新增物体明确位置、尺度和行为。</p></div></div>
+          <article class="case-card" id="case-0246" data-case-id="0246" data-duration="3.20833333" aria-labelledby="title-0246">
+    <div class="case-heading"><h3 id="title-0246">添加海鸥，保留帆船</h3><a class="case-id" href="#case-0246" aria-label="跳转至案例 0246">案例 0246 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>在左上方天空中添加一只飞翔的海鸥。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0246/source.jpg" alt="原视频: 添加海鸥，保留帆船" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0246/source.mp4" aria-label="原视频: 添加海鸥，保留帆船" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0246/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 添加海鸥，保留帆船" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0246/proxy.jpg" alt="可执行代理: 添加海鸥，保留帆船" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0246/proxy.mp4" aria-label="可执行代理: 添加海鸥，保留帆船" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0246/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 添加海鸥，保留帆船" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0246/without-proxy.jpg" alt="无代理: 添加海鸥，保留帆船" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0246/without-proxy.mp4" aria-label="无代理: 添加海鸥，保留帆船" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0246/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 添加海鸥，保留帆船" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0246/with-proxy.jpg" alt="有代理: 添加海鸥，保留帆船" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0246/with-proxy.mp4" aria-label="有代理: 添加海鸥，保留帆船" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0246/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 添加海鸥，保留帆船" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0246 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="3.20833333" value="0" step="0.04166667" aria-label="调整案例 0246 全部四路视频的进度">
+      <span class="time-label">0.0 / 3.2 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果添加了鸟，却移除了原有帆船。代理引导结果添加了海鸥，同时保留帆船和岩石海岸。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+<article class="case-card" id="case-0294" data-case-id="0294" data-duration="3.08333333" aria-labelledby="title-0294">
+    <div class="case-heading"><h3 id="title-0294">落日海滩上的海鸥</h3><a class="case-id" href="#case-0294" aria-label="跳转至案例 0294">案例 0294 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>在岸边附近添加一只站立的海鸥。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0294/source.jpg" alt="原视频: 落日海滩上的海鸥" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0294/source.mp4" aria-label="原视频: 落日海滩上的海鸥" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0294/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 落日海滩上的海鸥" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0294/proxy.jpg" alt="可执行代理: 落日海滩上的海鸥" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0294/proxy.mp4" aria-label="可执行代理: 落日海滩上的海鸥" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0294/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 落日海滩上的海鸥" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0294/without-proxy.jpg" alt="无代理: 落日海滩上的海鸥" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0294/without-proxy.mp4" aria-label="无代理: 落日海滩上的海鸥" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0294/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 落日海滩上的海鸥" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0294/with-proxy.jpg" alt="有代理: 落日海滩上的海鸥" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0294/with-proxy.mp4" aria-label="有代理: 落日海滩上的海鸥" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0294/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 落日海滩上的海鸥" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0294 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="3.08333333" value="0" step="0.04166667" aria-label="调整案例 0294 全部四路视频的进度">
+      <span class="time-label">0.0 / 3.1 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果将海滩全景变成了鸟的特写。代理引导结果在沙滩上添加海鸥，同时保留落日和宽阔构图。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+        </section>
+<section class="task-section container" id="local_change" aria-labelledby="task-local_change">
+          <div class="task-heading"><span class="task-number" aria-hidden="true">03</span><div><h2 id="task-local_change">局部修改</h2><p>明确需要修改的内容，并为场景其余部分提供持续参考。</p></div></div>
+          <article class="case-card" id="case-0068" data-case-id="0068" data-duration="3.50000000" aria-labelledby="title-0068">
+    <div class="case-heading"><h3 id="title-0068">保持原追车视角的装甲车</h3><a class="case-id" href="#case-0068" aria-label="跳转至案例 0068">案例 0068 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>将汽车替换为哑光绿色军用装甲车，保留其位置和姿态。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0068/source.jpg" alt="原视频: 保持原追车视角的装甲车" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0068/source.mp4" aria-label="原视频: 保持原追车视角的装甲车" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0068/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 保持原追车视角的装甲车" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0068/proxy.jpg" alt="可执行代理: 保持原追车视角的装甲车" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0068/proxy.mp4" aria-label="可执行代理: 保持原追车视角的装甲车" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0068/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 保持原追车视角的装甲车" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0068/without-proxy.jpg" alt="无代理: 保持原追车视角的装甲车" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0068/without-proxy.mp4" aria-label="无代理: 保持原追车视角的装甲车" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0068/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 保持原追车视角的装甲车" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0068/with-proxy.jpg" alt="有代理: 保持原追车视角的装甲车" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0068/with-proxy.mp4" aria-label="有代理: 保持原追车视角的装甲车" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0068/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 保持原追车视角的装甲车" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0068 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="3.50000000" value="0" step="0.04166667" aria-label="调整案例 0068 全部四路视频的进度">
+      <span class="time-label">0.0 / 3.5 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果让车辆转向镜头，并丢失了游戏界面。代理引导结果保留了后方追车视角、路线显示和解说者画中画。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+<article class="case-card" id="case-0063" data-case-id="0063" data-duration="2.58333333" aria-labelledby="title-0063">
+    <div class="case-heading"><h3 id="title-0063">换一张桌子，保留原办公室</h3><a class="case-id" href="#case-0063" aria-label="跳转至案例 0063">案例 0063 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>将办公桌替换为质朴的农舍风格木桌。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0063/source.jpg" alt="原视频: 换一张桌子，保留原办公室" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0063/source.mp4" aria-label="原视频: 换一张桌子，保留原办公室" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0063/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 换一张桌子，保留原办公室" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0063/proxy.jpg" alt="可执行代理: 换一张桌子，保留原办公室" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0063/proxy.mp4" aria-label="可执行代理: 换一张桌子，保留原办公室" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0063/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 换一张桌子，保留原办公室" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0063/without-proxy.jpg" alt="无代理: 换一张桌子，保留原办公室" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0063/without-proxy.mp4" aria-label="无代理: 换一张桌子，保留原办公室" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0063/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 换一张桌子，保留原办公室" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0063/with-proxy.jpg" alt="有代理: 换一张桌子，保留原办公室" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0063/with-proxy.mp4" aria-label="有代理: 换一张桌子，保留原办公室" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0063/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 换一张桌子，保留原办公室" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0063 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="2.58333333" value="0" step="0.04166667" aria-label="调整案例 0063 全部四路视频的进度">
+      <span class="time-label">0.0 / 2.6 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果移除了叠放的文件托盘，并替换了黑色办公椅。代理引导结果修改了桌子，同时保留这两件原有物品。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+        </section>
+<section class="task-section container" id="local_remove" aria-labelledby="task-local_remove">
+          <div class="task-heading"><span class="task-number" aria-hidden="true">04</span><div><h2 id="task-local_remove">物体移除</h2><p>先渲染移除目标物体后的场景，再由视频模型实现最终效果。</p></div></div>
+          <article class="case-card" id="case-0211" data-case-id="0211" data-duration="2.16666667" aria-labelledby="title-0211">
+    <div class="case-heading"><h3 id="title-0211">移除钢琴周围的键盘</h3><a class="case-id" href="#case-0211" aria-label="跳转至案例 0211">案例 0211 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>移除钢琴周围的新月形键盘。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0211/source.jpg" alt="原视频: 移除钢琴周围的键盘" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0211/source.mp4" aria-label="原视频: 移除钢琴周围的键盘" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0211/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 移除钢琴周围的键盘" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0211/proxy.jpg" alt="可执行代理: 移除钢琴周围的键盘" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0211/proxy.mp4" aria-label="可执行代理: 移除钢琴周围的键盘" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0211/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 移除钢琴周围的键盘" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0211/without-proxy.jpg" alt="无代理: 移除钢琴周围的键盘" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0211/without-proxy.mp4" aria-label="无代理: 移除钢琴周围的键盘" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0211/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 移除钢琴周围的键盘" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0211/with-proxy.jpg" alt="有代理: 移除钢琴周围的键盘" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0211/with-proxy.mp4" aria-label="有代理: 移除钢琴周围的键盘" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0211/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 移除钢琴周围的键盘" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0211 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="2.16666667" value="0" step="0.04166667" aria-label="调整案例 0211 全部四路视频的进度">
+      <span class="time-label">0.0 / 2.2 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果中，环形键盘始终存在。代理引导结果移除了外围键盘，同时保留中央钢琴。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+        </section>
+<section class="task-section container" id="background_change" aria-labelledby="task-background_change">
+          <div class="task-heading"><span class="task-number" aria-hidden="true">05</span><div><h2 id="task-background_change">背景替换</h2><p>规划新环境，同时保留前景主体。</p></div></div>
+          <article class="case-card" id="case-0166" data-case-id="0166" data-duration="3.08333333" aria-labelledby="title-0166">
+    <div class="case-heading"><h3 id="title-0166">更换演播环境，保留发言人</h3><a class="case-id" href="#case-0166" aria-label="跳转至案例 0166">案例 0166 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>将新闻演播室替换为未来感的赛博指挥中心。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0166/source.jpg" alt="原视频: 更换演播环境，保留发言人" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0166/source.mp4" aria-label="原视频: 更换演播环境，保留发言人" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0166/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 更换演播环境，保留发言人" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0166/proxy.jpg" alt="可执行代理: 更换演播环境，保留发言人" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0166/proxy.mp4" aria-label="可执行代理: 更换演播环境，保留发言人" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0166/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 更换演播环境，保留发言人" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0166/without-proxy.jpg" alt="无代理: 更换演播环境，保留发言人" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0166/without-proxy.mp4" aria-label="无代理: 更换演播环境，保留发言人" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0166/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 更换演播环境，保留发言人" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0166/with-proxy.jpg" alt="有代理: 更换演播环境，保留发言人" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0166/with-proxy.mp4" aria-label="有代理: 更换演播环境，保留发言人" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0166/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 更换演播环境，保留发言人" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0166 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="3.08333333" value="0" step="0.04166667" aria-label="调整案例 0166 全部四路视频的进度">
+      <span class="time-label">0.0 / 3.1 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果生成了空无一人的指挥室，丢失了发言人。代理引导结果在新环境中保留了她。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+        </section>
+<section class="task-section container" id="creative_edit" aria-labelledby="task-creative_edit">
+          <div class="task-heading"><span class="task-number" aria-hidden="true">06</span><div><h2 id="task-creative_edit">创意变换</h2><p>用程序化形状和特效，将设想中的变换呈现为可见方案。</p></div></div>
+          <div class="empty-showcase">展示案例待补充。</div>
+        </section>
+<section class="task-section container" id="global_style" aria-labelledby="task-global_style">
+          <div class="task-heading"><span class="task-number" aria-hidden="true">07</span><div><h2 id="task-global_style">全局风格化</h2><p>为所需的视觉风格提供具体的程序化预览。</p></div></div>
+          <article class="case-card" id="case-0041" data-case-id="0041" data-duration="4.04166667" aria-labelledby="title-0041">
+    <div class="case-heading"><h3 id="title-0041">波普色彩人像</h3><a class="case-id" href="#case-0041" aria-label="跳转至案例 0041">案例 0041 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>将人像转换为波普艺术风格。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0041/source.jpg" alt="原视频: 波普色彩人像" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0041/source.mp4" aria-label="原视频: 波普色彩人像" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0041/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 波普色彩人像" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0041/proxy.jpg" alt="可执行代理: 波普色彩人像" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0041/proxy.mp4" aria-label="可执行代理: 波普色彩人像" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0041/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 波普色彩人像" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0041/without-proxy.jpg" alt="无代理: 波普色彩人像" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0041/without-proxy.mp4" aria-label="无代理: 波普色彩人像" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0041/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 波普色彩人像" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0041/with-proxy.jpg" alt="有代理: 波普色彩人像" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0041/with-proxy.mp4" aria-label="有代理: 波普色彩人像" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0041/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 波普色彩人像" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0041 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="4.04166667" value="0" step="0.04166667" aria-label="调整案例 0041 全部四路视频的进度">
+      <span class="time-label">0.0 / 4.0 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果主要对照片纹理重新着色。代理引导结果添加了所需的图形化轮廓和半色调细节。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+<article class="case-card" id="case-0055" data-case-id="0055" data-duration="2.70833333" aria-labelledby="title-0055">
+    <div class="case-heading"><h3 id="title-0055">湖面上的雨</h3><a class="case-id" href="#case-0055" aria-label="跳转至案例 0055">案例 0055 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>为湖畔场景营造下雨的氛围。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0055/source.jpg" alt="原视频: 湖面上的雨" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0055/source.mp4" aria-label="原视频: 湖面上的雨" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0055/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 湖面上的雨" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0055/proxy.jpg" alt="可执行代理: 湖面上的雨" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0055/proxy.mp4" aria-label="可执行代理: 湖面上的雨" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0055/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 湖面上的雨" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0055/without-proxy.jpg" alt="无代理: 湖面上的雨" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0055/without-proxy.mp4" aria-label="无代理: 湖面上的雨" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0055/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 湖面上的雨" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0055/with-proxy.jpg" alt="有代理: 湖面上的雨" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0055/with-proxy.mp4" aria-label="有代理: 湖面上的雨" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0055/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 湖面上的雨" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0055 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="2.70833333" value="0" step="0.04166667" aria-label="调整案例 0055 全部四路视频的进度">
+      <span class="time-label">0.0 / 2.7 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果保留了晴朗天气。代理引导结果呈现了可见的雨丝，以及更暗、云层更多的氛围。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+        </section>
+<section class="task-section container" id="subtitle_edit" aria-labelledby="task-subtitle_edit">
+          <div class="task-heading"><span class="task-number" aria-hidden="true">08</span><div><h2 id="task-subtitle_edit">字幕编辑</h2><p>在保留源视频场景的同时，添加、替换或移除画面文字。</p></div></div>
+          <article class="case-card" id="case-0405" data-case-id="0405" data-duration="2.70833333" aria-labelledby="title-0405">
+    <div class="case-heading"><h3 id="title-0405">移除字幕带，恢复干净天空</h3><a class="case-id" href="#case-0405" aria-label="跳转至案例 0405">案例 0405 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>移除航拍风景中的字幕。</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0405/source.jpg" alt="原视频: 移除字幕带，恢复干净天空" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0405/source.mp4" aria-label="原视频: 移除字幕带，恢复干净天空" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0405/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 移除字幕带，恢复干净天空" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0405/proxy.jpg" alt="可执行代理: 移除字幕带，恢复干净天空" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0405/proxy.mp4" aria-label="可执行代理: 移除字幕带，恢复干净天空" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0405/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 移除字幕带，恢复干净天空" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0405/without-proxy.jpg" alt="无代理: 移除字幕带，恢复干净天空" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0405/without-proxy.mp4" aria-label="无代理: 移除字幕带，恢复干净天空" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0405/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 移除字幕带，恢复干净天空" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0405/with-proxy.jpg" alt="有代理: 移除字幕带，恢复干净天空" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0405/with-proxy.mp4" aria-label="有代理: 移除字幕带，恢复干净天空" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0405/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 移除字幕带，恢复干净天空" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0405 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="2.70833333" value="0" step="0.04166667" aria-label="调整案例 0405 全部四路视频的进度">
+      <span class="time-label">0.0 / 2.7 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果保留了顶部字幕。代理引导结果移除了字幕带，同时保留风景。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+<article class="case-card" id="case-0413" data-case-id="0413" data-duration="2.70833333" aria-labelledby="title-0413">
+    <div class="case-heading"><h3 id="title-0413">为城市夜景添加一行字幕</h3><a class="case-id" href="#case-0413" aria-label="跳转至案例 0413">案例 0413 ↗</a></div>
+    <p class="edit-request"><b>编辑指令</b>在底部添加白色文字、黑色描边的字幕：“Beneath a starless sky, city lights hum a quiet lullaby.”</p>
+    <div class="video-grid"><figure class="video-panel source" data-role="source">
+      <figcaption class="view-label"><span>原视频</span><span>输入</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0413/source.jpg" alt="原视频: 为城市夜景添加一行字幕" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0413/source.mp4" aria-label="原视频: 为城市夜景添加一行字幕" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0413/source.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开原视频: 为城市夜景添加一行字幕" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel proxy" data-role="proxy">
+      <figcaption class="view-label"><span>可执行代理</span><span>方案</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0413/proxy.jpg" alt="可执行代理: 为城市夜景添加一行字幕" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0413/proxy.mp4" aria-label="可执行代理: 为城市夜景添加一行字幕" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0413/proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开可执行代理: 为城市夜景添加一行字幕" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel baseline" data-role="without-proxy">
+      <figcaption class="view-label"><span>无代理</span><span>H3</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0413/without-proxy.jpg" alt="无代理: 为城市夜景添加一行字幕" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0413/without-proxy.mp4" aria-label="无代理: 为城市夜景添加一行字幕" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0413/without-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开无代理: 为城市夜景添加一行字幕" title="打开此视频">↗</a>
+      </div>
+    </figure>
+<figure class="video-panel guided" data-role="with-proxy">
+      <figcaption class="view-label"><span>有代理</span><span>前 5 步</span></figcaption>
+      <div class="video-frame">
+        <img class="video-poster" src="assets/cases/0413/with-proxy.jpg" alt="有代理: 为城市夜景添加一行字幕" width="960" height="544" loading="lazy" decoding="async">
+        <video muted playsinline loop preload="none" data-src="assets/cases/0413/with-proxy.mp4" aria-label="有代理: 为城市夜景添加一行字幕" tabindex="-1"></video>
+        <a class="open-video" href="assets/cases/0413/with-proxy.mp4" target="_blank" rel="noopener" aria-label="在新标签页打开有代理: 为城市夜景添加一行字幕" title="打开此视频">↗</a>
+      </div>
+    </figure></div>
+    <div class="case-controls" role="group" aria-label="案例 0413 的同步播放控件">
+      <button class="transport" data-action="play" type="button" aria-label="播放全部四路视频" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6Z"/></svg><span>播放</span></button>
+      <button class="transport" data-action="restart" type="button" aria-label="从头播放全部四路视频"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4a6 6 0 1 1-1 6" fill="none"/><path d="M3 1v4h4" fill="none"/></svg><span>从头播放</span></button>
+      <input class="seek" type="range" min="0" max="2.70833333" value="0" step="0.04166667" aria-label="调整案例 0413 全部四路视频的进度">
+      <span class="time-label">0.0 / 2.7 秒</span><span class="loop-note">四路同步 · 静音 · 循环</span><span class="case-status" role="status">加载中…</span>
+    </div>
+    <p class="case-observation">无代理结果将英文指令词“Add”也写入画面，并采用黑字、实心白底的字幕带。代理引导结果以带描边的白色文字呈现了目标句子。</p>
+    <div class="case-error" role="status"><span>视频暂时无法加载，可重试或单独打开某一路视频。</span><button type="button" data-action="retry">重试</button></div>
+  </article>
+        </section>
+      <div class="gallery-note container">
+        <span class="note-line"></span>
+        <p>以上为 OpenVE-Bench 中代理引导带来可见改善的精选对比。两组输出均使用同一冻结的 INT8 MiniMax-H3 模型、seed=42 和 20 步采样。原视频全程参与，编辑后的代理仅在前 5 步参与。为便于阅读，编辑指令采用简述。</p>
+      </div>
+    </section>
+
+    <section class="citation-section container">
+      <div><p class="eyebrow">参考文献</p><h2>引用本工作</h2><p>Yuanhong Zheng. <em>Code-Guided Video Editing with Source-Grounded Executable Proxies.</em> 技术报告，2026。</p></div>
+      <button type="button" class="button button-paper" id="copy-citation">复制 BibTeX <span aria-hidden="true">↗</span></button>
+    </section>
+  </main>
+  <footer class="site-footer container">
+    <div><a class="footer-name" href="#top">代码引导的视频编辑</a><p>Yuanhong Zheng · 北京大学</p></div>
+    <div class="credits"><p>源视频与编辑任务： <a href="https://github.com/OpenVE-Team/OpenVE-3M" target="_blank" rel="noopener">OpenVE-Bench</a></p><p>基于 <a href="https://code-video-model.github.io/" target="_blank" rel="noopener">Code Video Model</a> 和 <a href="https://github.com/MiniMax-AI/MiniMax-H3" target="_blank" rel="noopener">MiniMax-H3</a>.</p></div>
+    <a class="back-top" href="#top">返回顶部 ↑</a>
+  </footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <noscript><p class="noscript-note">视频对比需要 JavaScript 来同步播放。每一路视频也提供了单独打开的链接。</p></noscript>
+</body>
+</html>

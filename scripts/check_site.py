@@ -71,6 +71,32 @@ def main():
                 require(path.is_file(), f"Missing published file: {url.path}")
             elif url.fragment:
                 require(url.fragment in ids, f"Unresolved page anchor: {url.fragment}")
+    # Both static language editions share the same cases, media and anchors.
+    require(source.index('id="method"') < source.index('id="results"'), "Method must precede results")
+    chinese_source = (DIST / "zh.html").read_text()
+    chinese_page = Page()
+    chinese_page.feed(chinese_source)
+    require('<html lang="zh-CN">' in chinese_source, "Chinese document language missing")
+    require(chinese_source.index('id="method"') < chinese_source.index('id="results"'), "Chinese method must precede results")
+    chinese_ids = [attrs["id"] for _, attrs in chinese_page.elements if "id" in attrs]
+    require(set(chinese_ids) == set(ids) and len(chinese_ids) == len(set(chinese_ids)), "Language anchors differ")
+    chinese_videos = [attrs for tag, attrs in chinese_page.elements if tag == "video"]
+    require({v["data-src"] for v in chinese_videos} == {v["data-src"] for v in videos}, "Language media differs")
+    require(len(chinese_videos) == len(videos), "Chinese comparison views missing")
+    require(all("src" not in v and v.get("preload") == "none" for v in chinese_videos), "Chinese videos load eagerly")
+    require("{{" not in source and "{{" not in chinese_source, "Unresolved template copy")
+    for document, parsed, current_language in [(source, page, "en"), (chinese_source, chinese_page, "zh-CN")]:
+        links = [a for tag, a in parsed.elements if tag == "a" and "data-language-page" in a]
+        require({a["href"] for a in links} == {"index.html", "zh.html"}, "Language switch missing")
+        require([a["hreflang"] for a in links if a.get("aria-current") == "page"] == [current_language], "Wrong active language")
+        for _, attrs in parsed.elements:
+            for key in ["href", "src", "data-src"]:
+                url = urlsplit(attrs.get(key, ""))
+                if url.scheme or url.netloc or not url.path:
+                    continue
+                path = (DIST / unquote(url.path)).resolve()
+                require(path.is_relative_to(DIST) and path.is_file(), "Missing language edition asset")
+
     for cid, case in provenance["cases"].items():
         guided = case["conditioning_validation"]["with-proxy"]
         require(guided["proxy_condition_steps"] == list(range(1, 6)), f"Wrong proxy schedule: {cid}")
@@ -91,7 +117,7 @@ def main():
             text = path.read_text()
             require(not any(re.search(pattern, text) for pattern in private_patterns), f"Private data in {path.relative_to(DIST)}")
     size = sum(path.stat().st_size for path in DIST.rglob("*") if path.is_file())
-    print(json.dumps({"categories": 8, "cases": len(cases), "videos": len(videos), "empty_categories": [c["id"] for c in categories if not c["cases"]], "verified_media": True, "published_bytes": size, "all_cases_expanded": True}, indent=2))
+    print(json.dumps({"languages": ["en", "zh-CN"], "categories": 8, "cases": len(cases), "videos": len(videos), "empty_categories": [c["id"] for c in categories if not c["cases"]], "verified_media": True, "published_bytes": size, "all_cases_expanded": True}, indent=2))
 
 
 if __name__ == "__main__":
