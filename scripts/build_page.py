@@ -29,10 +29,11 @@ def panel(item, title, ui):
     hint = ui[hint_key] if hint_key else 'H3'
     src, poster = escape(item['src'], quote=True), escape(item['poster'], quote=True)
     aria = f'{label}: {title}'
+    width, height = item.get('width', 960), item.get('height', 544)
     return f'''<figure class="video-panel {class_name}" data-role="{item['role']}">
       <figcaption class="view-label"><span>{escape(label)}</span><span>{escape(hint)}</span></figcaption>
-      <div class="video-frame">
-        <img class="video-poster" src="{poster}" alt="{escape(aria, quote=True)}" width="960" height="544" loading="lazy" decoding="async">
+      <div class="video-frame" style="aspect-ratio:{width}/{height}">
+        <img class="video-poster" src="{poster}" alt="{escape(aria, quote=True)}" width="{width}" height="{height}" loading="lazy" decoding="async">
         <video muted playsinline loop preload="none" data-src="{src}" aria-label="{escape(aria, quote=True)}" tabindex="-1"></video>
         <a class="open-video" href="{src}" target="_blank" rel="noopener" aria-label="{text(ui, 'OPEN_VIDEO_LABEL', label=aria)}" title="{text(ui, 'OPEN_VIDEO')}">↗</a>
       </div>
@@ -42,15 +43,16 @@ def panel(item, title, ui):
 def card(case, media, ui):
     cid, title = escape(case['id']), escape(case['title'])
     duration = media['duration']
+    fps = media.get('fps', 24)
     views = '\n'.join(panel(item, case['title'], ui) for item in media['media'])
-    return f'''<article class="case-card" id="case-{cid}" data-case-id="{cid}" data-duration="{duration:.8f}" aria-labelledby="title-{cid}">
+    return f'''<article class="case-card" id="case-{cid}" data-case-id="{cid}" data-duration="{duration:.8f}" data-fps="{fps}" aria-labelledby="title-{cid}">
     <div class="case-heading"><h3 id="title-{cid}">{title}</h3><a class="case-id" href="#case-{cid}" aria-label="{text(ui, 'CASE_LINK', id=cid)}">{text(ui, 'CASE_LABEL')} {cid} ↗</a></div>
     <p class="edit-request"><b>{text(ui, 'EDIT_REQUEST')}</b>{escape(case['edit'])}</p>
     <div class="video-grid">{views}</div>
     <div class="case-controls" role="group" aria-label="{text(ui, 'CONTROLS_LABEL', id=cid)}">
       <button class="transport" data-action="play" type="button" aria-label="{text(ui, 'PLAY_ALL')}" aria-pressed="false">{PLAY}<span>{text(ui, 'PLAY')}</span></button>
       <button class="transport" data-action="restart" type="button" aria-label="{text(ui, 'RESTART_ALL')}">{RESTART}<span>{text(ui, 'RESTART')}</span></button>
-      <input class="seek" type="range" min="0" max="{duration:.8f}" value="0" step="0.04166667" aria-label="{text(ui, 'SEEK_ALL', id=cid)}">
+      <input class="seek" type="range" min="0" max="{duration:.8f}" value="0" step="{1/fps:.8f}" aria-label="{text(ui, 'SEEK_ALL', id=cid)}">
       <span class="time-label">0.0 / {duration:.1f} {text(ui, 'TIME_UNIT')}</span><span class="loop-note">{text(ui, 'LOOP_NOTE')}</span><span class="case-status" role="status">{text(ui, 'LOADING')}</span>
     </div>
     <p class="case-observation">{escape(case['observation'])}</p>

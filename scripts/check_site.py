@@ -101,15 +101,29 @@ def main():
         guided = case["conditioning_validation"]["with-proxy"]
         require(guided["proxy_condition_steps"] == list(range(1, 6)), f"Wrong proxy schedule: {cid}")
         require(guided["source_condition_steps"] == list(range(1, 21)), f"Wrong source schedule: {cid}")
-        require(guided["actual_sampling_trace_verified"], f"Unverified early-step trace: {cid}")
+        require(guided["actual_sampling_trace_verified"] or (
+            guided.get("conditioning_metadata_verified") and
+            guided.get("schedule_evidence") == "native_conditioning_record"
+        ), f"Unverified early-step evidence: {cid}")
+        if guided.get("conditioning_metadata_verified"):
+            require(guided.get("same_source_reference_verified"), f"Unmatched source reference: {cid}")
+            require(guided["source_reference_sha256"] ==
+                    case["conditioning_validation"]["without-proxy"]["source_reference_sha256"],
+                    f"Source reference hashes differ: {cid}")
+        dimensions = set()
         for item in case["media"]:
             video = DIST / item["src"]
             require(sha256(video.read_bytes()).hexdigest() == item["published_file_sha256"], f"Video changed: {item['src']}")
             require(item["source_video_packet_sha256"] == item["published_video_packet_sha256"], "Encoded video content changed")
             require(item["all_encoded_streams_preserved"] and item["faststart"], "Invalid remux")
-            require((item["width"], item["height"], item["fps"]) == (960, 544, 24), "Incorrect video geometry or FPS")
+            dimensions.add((item["width"], item["height"], item["fps"], item["frames"]))
+            require(item["width"] > 0 and item["height"] > 0 and item["fps"] > 0, "Invalid native media format")
             poster = item["poster"]
             require(sha256((DIST / poster["src"]).read_bytes()).hexdigest() == poster["sha256"], "Poster changed")
+        require(len(dimensions) == 1, f"Four views have different formats or timelines: {cid}")
+        width, height, fps, frames = next(iter(dimensions))
+        require(media["cases"][cid].get("fps", 24) == fps, f"Playback FPS differs from source: {cid}")
+        require(abs(media["cases"][cid]["duration"] - frames / fps) < 1e-8, f"Playback timeline differs from source: {cid}")
     # Runtime artifacts and private infrastructure must never enter the site.
     private_patterns = [r"/ytech[^\s\"']+", r"\b(?:olp_|gho_)[A-Za-z0-9]{12,}", r"\b(?:sk-|AIza)[A-Za-z0-9_-]{16,}", r"https?://(?:10\.|127\.|localhost)"]
     for path in DIST.rglob("*"):

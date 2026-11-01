@@ -74,14 +74,14 @@ def normalized_relative(value: str) -> str:
     return path.as_posix()
 
 
-def video_metadata(metadata: dict, frames: int) -> dict:
+def video_metadata(metadata: dict, frames: int, geometry=(960, 544), fps=24) -> dict:
     videos = [s for s in metadata["streams"] if s["codec_type"] == "video"]
     require(len(videos) == 1, "Expected exactly one video stream")
     video = videos[0]
-    require((video.get("width"), video.get("height")) == (960, 544),
-            "Video geometry differs from 960 x 544; refusing to transcode")
-    require(Fraction(video["avg_frame_rate"]) == 24, "Video average FPS differs from 24")
-    require(Fraction(video["r_frame_rate"]) == 24, "Video nominal FPS differs from 24")
+    require((video.get("width"), video.get("height")) == tuple(geometry),
+            "Video geometry differs from the frozen source; refusing to transcode")
+    require(Fraction(video["avg_frame_rate"]) == fps, "Video average FPS differs from its frozen source")
+    require(Fraction(video["r_frame_rate"]) == fps, "Video nominal FPS differs from its frozen source")
     require(int(video["nb_frames"]) == frames, "Frame count differs from case metadata")
     require(video["codec_name"] == "h264", "Unexpected browser video codec; refusing to transcode")
     for stream in metadata["streams"]:
@@ -179,19 +179,25 @@ def check_conditioning(case: dict, site: Path, experiment_root: Path) -> tuple[d
 
 def prepare_one(task: dict, dist: Path, temporary_root: Path) -> dict:
     source = task["source"]
+    geometry = tuple(task.get("geometry", (960, 544)))
+    fps = task.get("fps", 24)
     require(sha256(source) == task["source_sha256"], "Frozen source changed after preflight")
     source_probe = probe(source)
-    video_metadata(source_probe, task["frames"])
+    video_metadata(source_probe, task["frames"], geometry, fps)
     before_stream_hashes = stream_hashes(source)
     before_video_hash = video_packet_hash(source)
     prefix = f"{task['case_id']}-{task['role']}"
     temporary_video = temporary_root / f"{prefix}.mp4"
     temporary_poster = temporary_root / f"{prefix}.jpg"
-    run("ffmpeg", "-v", "error", "-nostdin", "-threads", "1", "-i", str(source),
-        "-map", "0", "-c", "copy", "-map_metadata", "0", "-map_chapters", "0",
-        "-movflags", "+faststart", "-y", str(temporary_video))
+    already_faststart = faststart(source)
+    if already_faststart:
+        shutil.copyfile(source, temporary_video)
+    else:
+        run("ffmpeg", "-v", "error", "-nostdin", "-threads", "1", "-i", str(source),
+            "-map", "0", "-c", "copy", "-map_metadata", "0", "-map_chapters", "0",
+            "-movflags", "+faststart", "-y", str(temporary_video))
     after_probe = probe(temporary_video)
-    video = video_metadata(after_probe, task["frames"])
+    video = video_metadata(after_probe, task["frames"], geometry, fps)
     before_streams = [{key: stream.get(key) for key in STREAM_FIELDS}
                       for stream in source_probe["streams"]]
     after_streams = [{key: stream.get(key) for key in STREAM_FIELDS}
@@ -206,7 +212,7 @@ def prepare_one(task: dict, dist: Path, temporary_root: Path) -> dict:
         f"{task['poster_time_seconds']:.9f}", "-i", str(temporary_video), "-map", "0:v:0",
         "-frames:v", "1", "-an", "-q:v", "2", "-threads", "1", "-y", str(temporary_poster))
     poster_stream = probe(temporary_poster)["streams"][0]
-    require((poster_stream["width"], poster_stream["height"]) == (960, 544), "Poster dimensions mismatch")
+    require((poster_stream["width"], poster_stream["height"]) == geometry, "Poster dimensions mismatch")
     require(sha256(source) == task["source_sha256"], "Frozen source changed during preparation")
     video_path = dist / task["src"]
     poster_path = dist / task["poster"]
@@ -219,9 +225,10 @@ def prepare_one(task: dict, dist: Path, temporary_root: Path) -> dict:
         "source_video_packet_sha256": before_video_hash, "published_video_packet_sha256": after_video_hash,
         "encoded_stream_hashes": after_stream_hashes,
         "source_bytes": source.stat().st_size, "bytes": video_path.stat().st_size,
-        "width": video["width"], "height": video["height"], "fps": 24,
+        "width": video["width"], "height": video["height"], "fps": fps,
         "frames": int(video["nb_frames"]), "duration_seconds": float(video["duration"]),
         "streams": after_streams, "faststart": True, "all_encoded_streams_preserved": True,
+        "container_operation": "byte-identical copy" if already_faststart else "stream-copy remux",
         "poster": {"src": task["poster"], "sha256": sha256(poster_path),
                    "bytes": poster_path.stat().st_size, "time_seconds": task["poster_time_seconds"]},
     }
@@ -277,7 +284,7 @@ def main() -> None:
         manifest = {"experiment": EXPERIMENT, "cases": {}}
         provenance = {"schema_version": 1, "experiment": EXPERIMENT,
                       "source_collection": SOURCE_COLLECTION, "source_data_sha256": source_data_sha256,
-                      "preparation": {"operation": "MP4 stream-copy remux with faststart",
+                      "preparation": {"operation": "Copy faststart sources unchanged; otherwise MP4 stream-copy remux",
                                       "video_reencoded": False, "audio_reencoded": False,
                                       "all_streams_mapped": True,
                                       "poster_policy": "One JPEG near 30% of each case; same case timestamp for all four tracks"},

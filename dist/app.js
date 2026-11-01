@@ -23,6 +23,7 @@ class Comparison {
     this.seek = card.querySelector(".seek");
     this.timeLabel = card.querySelector(".time-label");
     this.duration = Number(card.dataset.duration);
+    this.fps = Number(card.dataset.fps) || 24;
     this.position = 0;
     this.loaded = false;
     this.ready = false;
@@ -162,7 +163,7 @@ class Comparison {
   }
 
   setPosition(value) {
-    this.position = clamp(value, 0, Math.max(0, this.duration - 1 / 24));
+    this.position = clamp(value, 0, Math.max(0, this.duration - 1 / this.fps));
     if (this.loaded && this.ready) {
       for (const video of this.videos) {
         if (video.readyState >= 1) video.currentTime = this.position;

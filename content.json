@@ -72,6 +72,12 @@
           "title": "Remove the surrounding keyboard",
           "edit": "Remove the crescent-shaped keyboard around the piano.",
           "observation": "The keyboard ring remains throughout the no-proxy output. The guided result removes the ring while retaining the central piano."
+        },
+        {
+          "id": "reco-remove-0098",
+          "title": "A clear desk, the same workspace",
+          "edit": "Remove the laptop from the desk.",
+          "observation": "The no-proxy output keeps the laptop throughout. Proxy guidance removes it while retaining the seated man, desk, and room."
         }
       ]
     },
@@ -85,6 +91,12 @@
           "title": "A new set, the same speaker",
           "edit": "Replace the newsroom with a futuristic cyber command center.",
           "observation": "The baseline creates an empty command room and loses the speaker. The proxy-guided result retains her in the new environment."
+        },
+        {
+          "id": "0150",
+          "title": "A village street around the original pair",
+          "edit": "Replace the roadside background with a Mediterranean village street.",
+          "observation": "Without a proxy, the wooded roadside remains and only sunlight and petals are added. The guided result introduces village buildings while retaining the person and dog."
         }
       ]
     },
@@ -92,8 +104,14 @@
       "id": "creative_edit",
       "title": "Creative transformation",
       "description": "Use procedural shapes and effects to give an imagined transformation a visible plan.",
-      "cases": [],
-      "empty_message": "Showcases to be added."
+      "cases": [
+        {
+          "id": "0329",
+          "title": "A living botanical figure",
+          "edit": "Transform the person into a living figure made of leaves, flowers, and vines.",
+          "observation": "The baseline adds foliage while retaining natural skin. Proxy guidance transforms the visible face and hand into green botanical material and keeps the leaf-raising motion."
+        }
+      ]
     },
     {
       "id": "global_style",

@@ -1,16 +1,7 @@
 {
-  "schema_version": 1,
-  "experiment": {
-    "id": "openve_h3_int8_early_step_20261031",
-    "steps": 20,
-    "proxy_steps": 5,
-    "seed": 42,
-    "fps": 24
-  },
-  "source_collection": "openve-h3-int8-early-step-20261031",
-  "source_data_sha256": "1adcdec5a8341e95360a8aa2213fc4e5f297086044446b8bedb7bbaf0595ec5d",
+  "schema_version": 2,
   "preparation": {
-    "operation": "MP4 stream-copy remux with faststart",
+    "operation": "Copy already-faststart sources unchanged or stream-copy remux; native frames, dimensions and FPS retained",
     "video_reencoded": false,
     "audio_reencoded": false,
     "all_streams_mapped": true,
@@ -3988,29 +3979,1027 @@
           }
         }
       ]
+    },
+    "0150": {
+      "category": "background_change",
+      "source_benchmark": "OpenVE-Bench",
+      "source_case_id": "0150",
+      "duration_seconds": 2.7083333333333335,
+      "frames": 65,
+      "fps": 24,
+      "width": 960,
+      "height": 544,
+      "poster_frame": 19,
+      "poster_time_seconds": 0.7916666666666666,
+      "conditioning_validation": {
+        "without-proxy": {
+          "record": "0150/h3/source_plus_prompt/raw.conditioning.json",
+          "record_sha256": "448a7c5a930ebde3909abe9034e309a4534f40a7f3f41c3fd5a9a537b3ca97f2",
+          "seed": 42,
+          "steps": 20,
+          "source_condition_steps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "proxy_condition_steps": [],
+          "actual_sampling_trace_verified": false,
+          "conditioning_metadata_verified": true,
+          "schedule_evidence": "native_conditioning_record",
+          "source_reference_sha256": "b82a522078698a8d5031335bcf5a1c458217218f5bfc293bbe8e6ce39c10c774",
+          "same_source_reference_verified": true
+        },
+        "with-proxy": {
+          "record": "0150/h3/source_plus_edited_proxy_plus_prompt/raw.conditioning.json",
+          "record_sha256": "5a7db41a3fc0ca8d75463a98d5a61629a26957df3aa63ea2837ecbf0d3773de0",
+          "seed": 42,
+          "steps": 20,
+          "source_condition_steps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "proxy_condition_steps": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "actual_sampling_trace_verified": false,
+          "conditioning_metadata_verified": true,
+          "schedule_evidence": "native_conditioning_record",
+          "source_reference_sha256": "b82a522078698a8d5031335bcf5a1c458217218f5bfc293bbe8e6ce39c10c774",
+          "same_source_reference_verified": true
+        }
+      },
+      "curation_audit_sha256": "396fb417473831e1400bb448aa93e2b021181460c445b0e2e9e5ba7825987faa",
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0150/source.mp4",
+          "source_site_relative_path": "assets/0150/source.mp4",
+          "source_file_sha256": "ada6b025cea5c6f51f058b0ee47e936484f5b771defca008c32fbcf2d542a106",
+          "published_file_sha256": "ada6b025cea5c6f51f058b0ee47e936484f5b771defca008c32fbcf2d542a106",
+          "source_video_packet_sha256": "7a24ded0f879667bd5e7d92296cdfa12062f4d9642c9ffe3edb146215eba46de",
+          "published_video_packet_sha256": "7a24ded0f879667bd5e7d92296cdfa12062f4d9642c9ffe3edb146215eba46de",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "7a24ded0f879667bd5e7d92296cdfa12062f4d9642c9ffe3edb146215eba46de"
+            }
+          ],
+          "source_bytes": 950399,
+          "bytes": 950399,
+          "width": 960,
+          "height": 544,
+          "fps": 24,
+          "frames": 65,
+          "duration_seconds": 2.708333,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 960,
+              "height": 544,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "24/1",
+              "avg_frame_rate": "24/1",
+              "duration": "2.708333",
+              "nb_frames": "65",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "container_operation": "byte-identical copy",
+          "poster": {
+            "src": "assets/cases/0150/source.jpg",
+            "sha256": "2ca1b668b1b1fb88c959d69b406d60478650a0675b0a323c0f4ae19759afdac0",
+            "bytes": 133580,
+            "time_seconds": 0.7916666666666666
+          }
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0150/proxy.mp4",
+          "source_site_relative_path": "assets/0150/proxy-display.mp4",
+          "source_file_sha256": "f062a5e24b264f3b3d20e66f149c60b34d269053f62cf10a154659e6e4439529",
+          "published_file_sha256": "f062a5e24b264f3b3d20e66f149c60b34d269053f62cf10a154659e6e4439529",
+          "source_video_packet_sha256": "48105a2caad8f52182839971e29b8589aed0727ec0ea7683e0b96aec1963956c",
+          "published_video_packet_sha256": "48105a2caad8f52182839971e29b8589aed0727ec0ea7683e0b96aec1963956c",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "48105a2caad8f52182839971e29b8589aed0727ec0ea7683e0b96aec1963956c"
+            }
+          ],
+          "source_bytes": 274384,
+          "bytes": 274384,
+          "width": 960,
+          "height": 544,
+          "fps": 24,
+          "frames": 65,
+          "duration_seconds": 2.708008,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 960,
+              "height": 544,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "24/1",
+              "avg_frame_rate": "24/1",
+              "duration": "2.708008",
+              "nb_frames": "65",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "container_operation": "byte-identical copy",
+          "poster": {
+            "src": "assets/cases/0150/proxy.jpg",
+            "sha256": "3fe6c8ade65644e4508d7b84d153a174b48af1937936f6878682c7db189f1bf8",
+            "bytes": 132298,
+            "time_seconds": 0.7916666666666666
+          }
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0150/without-proxy.mp4",
+          "source_site_relative_path": "assets/0150/baseline.mp4",
+          "source_file_sha256": "c9e0f6943414e662c1ecb840c9b120aa36eb8264cc62a20ecef7449276061198",
+          "published_file_sha256": "c9e0f6943414e662c1ecb840c9b120aa36eb8264cc62a20ecef7449276061198",
+          "source_video_packet_sha256": "c31bee265dfb6d5d79d021e6e8eadd419fe79e7c959a80aa97f4003d6817b63a",
+          "published_video_packet_sha256": "c31bee265dfb6d5d79d021e6e8eadd419fe79e7c959a80aa97f4003d6817b63a",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "c31bee265dfb6d5d79d021e6e8eadd419fe79e7c959a80aa97f4003d6817b63a"
+            },
+            {
+              "index": 1,
+              "type": "a",
+              "sha256": "1eb94d0fab0c65ea2c2f3ebff80267d7fd786425084c5ed728667a22ac2a2aa6"
+            }
+          ],
+          "source_bytes": 1337633,
+          "bytes": 1337633,
+          "width": 960,
+          "height": 544,
+          "fps": 24,
+          "frames": 65,
+          "duration_seconds": 2.708333,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 960,
+              "height": 544,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "24/1",
+              "avg_frame_rate": "24/1",
+              "duration": "2.708333",
+              "nb_frames": "65",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            },
+            {
+              "index": 1,
+              "codec_type": "audio",
+              "codec_name": "aac",
+              "profile": "LC",
+              "codec_tag_string": "mp4a",
+              "width": null,
+              "height": null,
+              "pix_fmt": null,
+              "r_frame_rate": "0/0",
+              "avg_frame_rate": "0/0",
+              "duration": "2.708344",
+              "nb_frames": "86",
+              "sample_rate": "32000",
+              "channels": 2,
+              "channel_layout": "stereo"
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "container_operation": "byte-identical copy",
+          "poster": {
+            "src": "assets/cases/0150/without-proxy.jpg",
+            "sha256": "101acbffbca2d8288e4850ea16939624c10d1c149c4493a054b5a47a6abca873",
+            "bytes": 134749,
+            "time_seconds": 0.7916666666666666
+          },
+          "frozen_experiment_identity": {
+            "relative_path": "outputs/0150/h3/source_plus_prompt/display.mp4",
+            "sha256": "c9e0f6943414e662c1ecb840c9b120aa36eb8264cc62a20ecef7449276061198",
+            "matches_source_site": true
+          }
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0150/with-proxy.mp4",
+          "source_site_relative_path": "assets/0150/with-proxy.mp4",
+          "source_file_sha256": "ab15b24bca796307e7435a5116c35fdd437d4553e9b7161ea39b09dfefbdb10a",
+          "published_file_sha256": "ab15b24bca796307e7435a5116c35fdd437d4553e9b7161ea39b09dfefbdb10a",
+          "source_video_packet_sha256": "42a485a40825dc7903894372c8d10596286d049fe13ac2d773ab6593472753ae",
+          "published_video_packet_sha256": "42a485a40825dc7903894372c8d10596286d049fe13ac2d773ab6593472753ae",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "42a485a40825dc7903894372c8d10596286d049fe13ac2d773ab6593472753ae"
+            },
+            {
+              "index": 1,
+              "type": "a",
+              "sha256": "2260a30a9b252790ac662beb8c69ea60bf33865b895bff826208c9e1436bfa9a"
+            }
+          ],
+          "source_bytes": 752872,
+          "bytes": 752872,
+          "width": 960,
+          "height": 544,
+          "fps": 24,
+          "frames": 65,
+          "duration_seconds": 2.708333,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 960,
+              "height": 544,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "24/1",
+              "avg_frame_rate": "24/1",
+              "duration": "2.708333",
+              "nb_frames": "65",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            },
+            {
+              "index": 1,
+              "codec_type": "audio",
+              "codec_name": "aac",
+              "profile": "LC",
+              "codec_tag_string": "mp4a",
+              "width": null,
+              "height": null,
+              "pix_fmt": null,
+              "r_frame_rate": "0/0",
+              "avg_frame_rate": "0/0",
+              "duration": "2.708344",
+              "nb_frames": "86",
+              "sample_rate": "32000",
+              "channels": 2,
+              "channel_layout": "stereo"
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "container_operation": "byte-identical copy",
+          "poster": {
+            "src": "assets/cases/0150/with-proxy.jpg",
+            "sha256": "8b1de3768c596a1cb1a322bfcb8a29f65f3c3f9fbaf64ffb28c5ebbf5ebef018",
+            "bytes": 95482,
+            "time_seconds": 0.7916666666666666
+          },
+          "frozen_experiment_identity": {
+            "relative_path": "outputs/0150/h3/source_plus_edited_proxy_plus_prompt/display.mp4",
+            "sha256": "ab15b24bca796307e7435a5116c35fdd437d4553e9b7161ea39b09dfefbdb10a",
+            "matches_source_site": true
+          }
+        }
+      ]
+    },
+    "0329": {
+      "category": "creative_edit",
+      "source_benchmark": "OpenVE-Bench",
+      "source_case_id": "0329",
+      "duration_seconds": 5.041666666666667,
+      "frames": 121,
+      "fps": 24,
+      "width": 960,
+      "height": 544,
+      "poster_frame": 36,
+      "poster_time_seconds": 1.5,
+      "conditioning_validation": {
+        "without-proxy": {
+          "record": "0329/h3/source_plus_prompt/raw.conditioning.json",
+          "record_sha256": "27b03ba1ab2cf1910533e5e5a21c9fbe9b173c8defee720cc523722c40f7c253",
+          "seed": 42,
+          "steps": 20,
+          "source_condition_steps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "proxy_condition_steps": [],
+          "actual_sampling_trace_verified": false,
+          "conditioning_metadata_verified": true,
+          "schedule_evidence": "native_conditioning_record",
+          "source_reference_sha256": "50c537748c482dbebee8d7629270de2cca67041698030ab39ec68e9a0d560a0c",
+          "same_source_reference_verified": true
+        },
+        "with-proxy": {
+          "record": "0329/h3/source_plus_edited_proxy_plus_prompt/raw.conditioning.json",
+          "record_sha256": "27b0fd02305e0ed21ebec669caaa2d7384ea502d445f2193e7e2c52c055b3f78",
+          "seed": 42,
+          "steps": 20,
+          "source_condition_steps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "proxy_condition_steps": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "actual_sampling_trace_verified": false,
+          "conditioning_metadata_verified": true,
+          "schedule_evidence": "native_conditioning_record",
+          "source_reference_sha256": "50c537748c482dbebee8d7629270de2cca67041698030ab39ec68e9a0d560a0c",
+          "same_source_reference_verified": true
+        }
+      },
+      "curation_audit_sha256": "396fb417473831e1400bb448aa93e2b021181460c445b0e2e9e5ba7825987faa",
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/0329/source.mp4",
+          "source_site_relative_path": "assets/0329/source.mp4",
+          "source_file_sha256": "f7ea37c27258c569db9e796f4d2dca795b0625e4a9933cb128b5ad72aaadeb9e",
+          "published_file_sha256": "f7ea37c27258c569db9e796f4d2dca795b0625e4a9933cb128b5ad72aaadeb9e",
+          "source_video_packet_sha256": "1933a2a9d920b3cbdcf41b4ace20e2dc345cf2e5cc270af5ab644b3083ffb10c",
+          "published_video_packet_sha256": "1933a2a9d920b3cbdcf41b4ace20e2dc345cf2e5cc270af5ab644b3083ffb10c",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "1933a2a9d920b3cbdcf41b4ace20e2dc345cf2e5cc270af5ab644b3083ffb10c"
+            }
+          ],
+          "source_bytes": 381091,
+          "bytes": 381091,
+          "width": 960,
+          "height": 544,
+          "fps": 24,
+          "frames": 121,
+          "duration_seconds": 5.041667,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 960,
+              "height": 544,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "24/1",
+              "avg_frame_rate": "24/1",
+              "duration": "5.041667",
+              "nb_frames": "121",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "container_operation": "byte-identical copy",
+          "poster": {
+            "src": "assets/cases/0329/source.jpg",
+            "sha256": "ddc842cad815d9d691e63628a0794696da4a2e68285c8ce078ee4c672a9d6976",
+            "bytes": 31502,
+            "time_seconds": 1.5
+          }
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/0329/proxy.mp4",
+          "source_site_relative_path": "assets/0329/proxy-display.mp4",
+          "source_file_sha256": "54ead6d6abb5111529740a04f1c8854c8ed6d2090edecb9cb756914327fcb020",
+          "published_file_sha256": "54ead6d6abb5111529740a04f1c8854c8ed6d2090edecb9cb756914327fcb020",
+          "source_video_packet_sha256": "f15923b749971d431089520c8afb0cf9109ea71ec02c4077b7f889b93cb76f1e",
+          "published_video_packet_sha256": "f15923b749971d431089520c8afb0cf9109ea71ec02c4077b7f889b93cb76f1e",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "f15923b749971d431089520c8afb0cf9109ea71ec02c4077b7f889b93cb76f1e"
+            }
+          ],
+          "source_bytes": 364456,
+          "bytes": 364456,
+          "width": 960,
+          "height": 544,
+          "fps": 24,
+          "frames": 121,
+          "duration_seconds": 5.041667,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 960,
+              "height": 544,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "24/1",
+              "avg_frame_rate": "24/1",
+              "duration": "5.041667",
+              "nb_frames": "121",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "container_operation": "byte-identical copy",
+          "poster": {
+            "src": "assets/cases/0329/proxy.jpg",
+            "sha256": "d7a6d6eb1484e66d002336fc38274c775274f0f10baef201882ff0ced5b57911",
+            "bytes": 62218,
+            "time_seconds": 1.5
+          }
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/0329/without-proxy.mp4",
+          "source_site_relative_path": "assets/0329/baseline.mp4",
+          "source_file_sha256": "0b2efb38066d19007a583bb40c9dafe0fe20c3b1ac0ba1c0b7f71ad2cd49417a",
+          "published_file_sha256": "0b2efb38066d19007a583bb40c9dafe0fe20c3b1ac0ba1c0b7f71ad2cd49417a",
+          "source_video_packet_sha256": "2f18c7004de7dc5c8718478bddfacc4d41474187b13b3861f07d57016cc67ce3",
+          "published_video_packet_sha256": "2f18c7004de7dc5c8718478bddfacc4d41474187b13b3861f07d57016cc67ce3",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "2f18c7004de7dc5c8718478bddfacc4d41474187b13b3861f07d57016cc67ce3"
+            },
+            {
+              "index": 1,
+              "type": "a",
+              "sha256": "11bdffaf5c579aa57158b4ddeeaf4ce615a32dedce6c99ee5b2d84596d6c847f"
+            }
+          ],
+          "source_bytes": 660078,
+          "bytes": 660078,
+          "width": 960,
+          "height": 544,
+          "fps": 24,
+          "frames": 121,
+          "duration_seconds": 5.041667,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 960,
+              "height": 544,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "24/1",
+              "avg_frame_rate": "24/1",
+              "duration": "5.041667",
+              "nb_frames": "121",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            },
+            {
+              "index": 1,
+              "codec_type": "audio",
+              "codec_name": "aac",
+              "profile": "LC",
+              "codec_tag_string": "mp4a",
+              "width": null,
+              "height": null,
+              "pix_fmt": null,
+              "r_frame_rate": "0/0",
+              "avg_frame_rate": "0/0",
+              "duration": "5.041656",
+              "nb_frames": "159",
+              "sample_rate": "32000",
+              "channels": 2,
+              "channel_layout": "stereo"
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "container_operation": "byte-identical copy",
+          "poster": {
+            "src": "assets/cases/0329/without-proxy.jpg",
+            "sha256": "1e23ab611d23f73fc2fca8c16ef053586a619182ae551ee0f957f8b4a8a5b0d5",
+            "bytes": 48369,
+            "time_seconds": 1.5
+          },
+          "frozen_experiment_identity": {
+            "relative_path": "outputs/0329/h3/source_plus_prompt/display.mp4",
+            "sha256": "0b2efb38066d19007a583bb40c9dafe0fe20c3b1ac0ba1c0b7f71ad2cd49417a",
+            "matches_source_site": true
+          }
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/0329/with-proxy.mp4",
+          "source_site_relative_path": "assets/0329/with-proxy.mp4",
+          "source_file_sha256": "36fd7c36d8a926305c6efc4f3cd8a450da2fe0b0a87d1032d8fa96b0f04dfb20",
+          "published_file_sha256": "36fd7c36d8a926305c6efc4f3cd8a450da2fe0b0a87d1032d8fa96b0f04dfb20",
+          "source_video_packet_sha256": "c0ca568a4e5ccaaab1209ca8c82fc7bdcf3bafb8e4c74d0c0f463d9c906f9882",
+          "published_video_packet_sha256": "c0ca568a4e5ccaaab1209ca8c82fc7bdcf3bafb8e4c74d0c0f463d9c906f9882",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "c0ca568a4e5ccaaab1209ca8c82fc7bdcf3bafb8e4c74d0c0f463d9c906f9882"
+            },
+            {
+              "index": 1,
+              "type": "a",
+              "sha256": "5caa189c45f7d18eb89111ae5b11c268cf638f513f064a17a8c3a0c029bfcd95"
+            }
+          ],
+          "source_bytes": 673924,
+          "bytes": 673924,
+          "width": 960,
+          "height": 544,
+          "fps": 24,
+          "frames": 121,
+          "duration_seconds": 5.041667,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 960,
+              "height": 544,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "24/1",
+              "avg_frame_rate": "24/1",
+              "duration": "5.041667",
+              "nb_frames": "121",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            },
+            {
+              "index": 1,
+              "codec_type": "audio",
+              "codec_name": "aac",
+              "profile": "LC",
+              "codec_tag_string": "mp4a",
+              "width": null,
+              "height": null,
+              "pix_fmt": null,
+              "r_frame_rate": "0/0",
+              "avg_frame_rate": "0/0",
+              "duration": "5.041656",
+              "nb_frames": "159",
+              "sample_rate": "32000",
+              "channels": 2,
+              "channel_layout": "stereo"
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "container_operation": "byte-identical copy",
+          "poster": {
+            "src": "assets/cases/0329/with-proxy.jpg",
+            "sha256": "6856f24a10b43096c002fa0457c3a9ef82da1180bc23228421377ea7de5e8644",
+            "bytes": 41747,
+            "time_seconds": 1.5
+          },
+          "frozen_experiment_identity": {
+            "relative_path": "outputs/0329/h3/source_plus_edited_proxy_plus_prompt/display.mp4",
+            "sha256": "36fd7c36d8a926305c6efc4f3cd8a450da2fe0b0a87d1032d8fa96b0f04dfb20",
+            "matches_source_site": true
+          }
+        }
+      ]
+    },
+    "reco-remove-0098": {
+      "category": "local_remove",
+      "source_benchmark": "ReCo-Bench",
+      "source_case_id": "remove-0098",
+      "duration_seconds": 5.0625,
+      "frames": 81,
+      "fps": 16,
+      "width": 832,
+      "height": 480,
+      "poster_frame": 24,
+      "poster_time_seconds": 1.5,
+      "conditioning_validation": {
+        "without-proxy": {
+          "record": "remove-0098/h3/source_plus_prompt/raw.conditioning.json",
+          "record_sha256": "acfe2c9a315d2136011730b7b6b58125209d9c7305dcf18f491ec4e68c207f2f",
+          "seed": 42,
+          "steps": 20,
+          "source_condition_steps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "proxy_condition_steps": [],
+          "actual_sampling_trace_verified": false,
+          "conditioning_metadata_verified": true,
+          "schedule_evidence": "native_conditioning_record",
+          "source_reference_sha256": "c1c0762e08b7809a4a4b15caaf07d9d58fb6163ae9ed77eb3e02bd3f1366e501",
+          "same_source_reference_verified": true
+        },
+        "with-proxy": {
+          "record": "remove-0098/h3/source_plus_edited_proxy_plus_prompt/raw.conditioning.json",
+          "record_sha256": "3c9bf834ce1872b3b8b1f29a9ab51311fa2c3929c48c4dd4ff472b3033bdf5f7",
+          "seed": 42,
+          "steps": 20,
+          "source_condition_steps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "proxy_condition_steps": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "actual_sampling_trace_verified": true,
+          "conditioning_metadata_verified": true,
+          "schedule_evidence": "actual_sampling_trace",
+          "source_reference_sha256": "c1c0762e08b7809a4a4b15caaf07d9d58fb6163ae9ed77eb3e02bd3f1366e501",
+          "same_source_reference_verified": true
+        }
+      },
+      "curation_audit_sha256": "9154a4f58e57e20b49aa8a2e4fbf4412d370d90da491d88535fa4310b90b14eb",
+      "media": [
+        {
+          "role": "source",
+          "src": "assets/cases/reco-remove-0098/source.mp4",
+          "source_site_relative_path": "assets/sources/e1a82a66a777ce51592d168a498d38cf596f6742c8b2436c635f1d2ae04469ff/original.mp4",
+          "source_file_sha256": "e1a82a66a777ce51592d168a498d38cf596f6742c8b2436c635f1d2ae04469ff",
+          "published_file_sha256": "4d89a68e788964924fc0ccc9b000823587382c629f42a311bafe145fb7c1a067",
+          "source_video_packet_sha256": "b1ef7e2461095dc5744d190fc026acf965c4b59e474dbd90bf90791701e70738",
+          "published_video_packet_sha256": "b1ef7e2461095dc5744d190fc026acf965c4b59e474dbd90bf90791701e70738",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "b1ef7e2461095dc5744d190fc026acf965c4b59e474dbd90bf90791701e70738"
+            }
+          ],
+          "source_bytes": 8064344,
+          "bytes": 8064364,
+          "width": 832,
+          "height": 480,
+          "fps": 16,
+          "frames": 81,
+          "duration_seconds": 5.0625,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 832,
+              "height": 480,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "16/1",
+              "avg_frame_rate": "16/1",
+              "duration": "5.062500",
+              "nb_frames": "81",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "poster": {
+            "src": "assets/cases/reco-remove-0098/source.jpg",
+            "sha256": "281a9f1e6f5e0967aa0bd6f5438bdd8e0119e467058239d28c88e968cdceb2f2",
+            "bytes": 45756,
+            "time_seconds": 1.5
+          }
+        },
+        {
+          "role": "proxy",
+          "src": "assets/cases/reco-remove-0098/proxy.mp4",
+          "source_site_relative_path": "assets/cases/remove-0098/proxy.mp4",
+          "source_file_sha256": "3b2f706b31048164445d5ca240ca24c012bb147679ee5166db23b4940dd5d752",
+          "published_file_sha256": "3b2f706b31048164445d5ca240ca24c012bb147679ee5166db23b4940dd5d752",
+          "source_video_packet_sha256": "a46d08455d0dadac7e16b36d1af1484091d6952be1fc95d7b25728d825f12551",
+          "published_video_packet_sha256": "a46d08455d0dadac7e16b36d1af1484091d6952be1fc95d7b25728d825f12551",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "a46d08455d0dadac7e16b36d1af1484091d6952be1fc95d7b25728d825f12551"
+            }
+          ],
+          "source_bytes": 449865,
+          "bytes": 449865,
+          "width": 832,
+          "height": 480,
+          "fps": 16,
+          "frames": 81,
+          "duration_seconds": 5.0625,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 832,
+              "height": 480,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "16/1",
+              "avg_frame_rate": "16/1",
+              "duration": "5.062500",
+              "nb_frames": "81",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "poster": {
+            "src": "assets/cases/reco-remove-0098/proxy.jpg",
+            "sha256": "b916e9d955c9715927c0282212a6396c95c73ee6c4330c7f21f839ae459019ab",
+            "bytes": 42369,
+            "time_seconds": 1.5
+          }
+        },
+        {
+          "role": "without-proxy",
+          "src": "assets/cases/reco-remove-0098/without-proxy.mp4",
+          "source_site_relative_path": "assets/cases/remove-0098/source_plus_prompt.mp4",
+          "source_file_sha256": "97437570782066ed3d6ff377649c2be961433c7b6bbcafb09587ff99e1f683ac",
+          "published_file_sha256": "97437570782066ed3d6ff377649c2be961433c7b6bbcafb09587ff99e1f683ac",
+          "source_video_packet_sha256": "7fc2678c7a39cbf952639abca71f3d09ce174421529dc61a1b0d6f26141c35cc",
+          "published_video_packet_sha256": "7fc2678c7a39cbf952639abca71f3d09ce174421529dc61a1b0d6f26141c35cc",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "7fc2678c7a39cbf952639abca71f3d09ce174421529dc61a1b0d6f26141c35cc"
+            }
+          ],
+          "source_bytes": 577459,
+          "bytes": 577459,
+          "width": 832,
+          "height": 480,
+          "fps": 16,
+          "frames": 81,
+          "duration_seconds": 5.0625,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 832,
+              "height": 480,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "16/1",
+              "avg_frame_rate": "16/1",
+              "duration": "5.062500",
+              "nb_frames": "81",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "poster": {
+            "src": "assets/cases/reco-remove-0098/without-proxy.jpg",
+            "sha256": "e0a155f73ad1cf1700e85eb52cacb0cc0897498b9bbbce5c315699e716f2fc7b",
+            "bytes": 40802,
+            "time_seconds": 1.5
+          },
+          "frozen_experiment_identity": {
+            "relative_path": "outputs/remove-0098/h3/source_plus_prompt/benchmark.mp4",
+            "sha256": "97437570782066ed3d6ff377649c2be961433c7b6bbcafb09587ff99e1f683ac",
+            "matches_source_site": true
+          }
+        },
+        {
+          "role": "with-proxy",
+          "src": "assets/cases/reco-remove-0098/with-proxy.mp4",
+          "source_site_relative_path": "assets/cases/remove-0098/source_plus_edited_proxy_plus_prompt.mp4",
+          "source_file_sha256": "cc6c60481cb98b14886c3dbfb24b5b21a664828df8c36ccaf2cac49ea81b0183",
+          "published_file_sha256": "cc6c60481cb98b14886c3dbfb24b5b21a664828df8c36ccaf2cac49ea81b0183",
+          "source_video_packet_sha256": "8385abfb596e61a228f713e04cab42b4e3cea4c44f79ff2c50edc53a324830b2",
+          "published_video_packet_sha256": "8385abfb596e61a228f713e04cab42b4e3cea4c44f79ff2c50edc53a324830b2",
+          "encoded_stream_hashes": [
+            {
+              "index": 0,
+              "type": "v",
+              "sha256": "8385abfb596e61a228f713e04cab42b4e3cea4c44f79ff2c50edc53a324830b2"
+            }
+          ],
+          "source_bytes": 719194,
+          "bytes": 719194,
+          "width": 832,
+          "height": 480,
+          "fps": 16,
+          "frames": 81,
+          "duration_seconds": 5.0625,
+          "streams": [
+            {
+              "index": 0,
+              "codec_type": "video",
+              "codec_name": "h264",
+              "profile": "High",
+              "codec_tag_string": "avc1",
+              "width": 832,
+              "height": 480,
+              "pix_fmt": "yuv420p",
+              "r_frame_rate": "16/1",
+              "avg_frame_rate": "16/1",
+              "duration": "5.062500",
+              "nb_frames": "81",
+              "sample_rate": null,
+              "channels": null,
+              "channel_layout": null
+            }
+          ],
+          "faststart": true,
+          "all_encoded_streams_preserved": true,
+          "poster": {
+            "src": "assets/cases/reco-remove-0098/with-proxy.jpg",
+            "sha256": "093db28c98dfc84661a2da2aacab33872ba2323fd6a1f10d013931683844992c",
+            "bytes": 47539,
+            "time_seconds": 1.5
+          },
+          "frozen_experiment_identity": {
+            "relative_path": "outputs/remove-0098/h3/source_plus_edited_proxy_plus_prompt/benchmark.mp4",
+            "sha256": "cc6c60481cb98b14886c3dbfb24b5b21a664828df8c36ccaf2cac49ea81b0183",
+            "matches_source_site": true
+          }
+        }
+      ]
     }
   },
   "validation": {
-    "case_count": 12,
-    "video_count": 48,
-    "poster_count": 48,
-    "all_geometry_960x544": true,
-    "all_fps_24": true,
+    "case_count": 15,
+    "video_count": 60,
+    "poster_count": 60,
+    "all_geometry_960x544": false,
+    "all_fps_24": false,
     "all_frame_counts_match": true,
     "all_stream_metadata_preserved": true,
     "all_video_packet_hashes_match": true,
     "all_audio_video_stream_hashes_match": true,
     "all_faststart": true,
     "all_posters_same_case_timestamp": true,
-    "all_posters_960x544": true,
-    "generated_outputs_match_current_experiment": 24,
-    "verified_early_step_sampling_traces": 12,
-    "source_data_unchanged": true,
-    "video_bytes": 47990542,
-    "poster_bytes": 3581948,
+    "all_posters_960x544": false,
+    "generated_outputs_match_current_experiment": 30,
+    "verified_early_step_sampling_traces": 13,
+    "video_bytes": 63196261,
+    "poster_bytes": 4438359,
     "largest_video": {
-      "src": "assets/cases/0041/with-proxy.mp4",
-      "bytes": 2958530
+      "src": "assets/cases/reco-remove-0098/source.mp4",
+      "bytes": 8064364
     },
     "codecs": {
       "video": [
@@ -4021,6 +5010,38 @@
       ]
     },
     "errors": [],
-    "total_media_bytes": 51572490
-  }
+    "total_media_bytes": 67634620,
+    "native_geometries": [
+      "832x480",
+      "960x544"
+    ],
+    "native_fps": [
+      16,
+      24
+    ],
+    "all_native_geometry_and_fps_preserved": true,
+    "verified_native_conditioning_records": 2,
+    "all_frozen_media_sources_unchanged": true
+  },
+  "legacy_source": {
+    "experiment": {
+      "id": "openve_h3_int8_early_step_20261031",
+      "steps": 20,
+      "proxy_steps": 5,
+      "seed": 42,
+      "fps": 24
+    },
+    "source_collection": "openve-h3-int8-early-step-20261031",
+    "source_data_sha256": "1adcdec5a8341e95360a8aa2213fc4e5f297086044446b8bedb7bbaf0595ec5d"
+  },
+  "experiment": {
+    "id": "selected_video_editing_showcases",
+    "steps": 20,
+    "proxy_steps": 5,
+    "seed": 42
+  },
+  "source_benchmarks": [
+    "OpenVE-Bench",
+    "ReCo-Bench"
+  ]
 }
