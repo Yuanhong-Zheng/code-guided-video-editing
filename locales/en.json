@@ -69,5 +69,6 @@
   "BACK_TOP": "Back to top",
   "NOSCRIPT": "Video comparisons use JavaScript for synchronized playback. Each view also has a direct video link.",
   "CLIPBOARD_SUCCESS": "BibTeX copied to clipboard",
-  "CLIPBOARD_ERROR": "Clipboard unavailable in this browser"
+  "CLIPBOARD_ERROR": "Clipboard unavailable in this browser",
+  "GITHUB_STATUS": "Coming soon"
 }

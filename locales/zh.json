@@ -69,5 +69,6 @@
   "BACK_TOP": "返回顶部",
   "NOSCRIPT": "视频对比需要 JavaScript 来同步播放。每一路视频也提供了单独打开的链接。",
   "CLIPBOARD_SUCCESS": "BibTeX 已复制到剪贴板",
-  "CLIPBOARD_ERROR": "当前浏览器无法访问剪贴板"
+  "CLIPBOARD_ERROR": "当前浏览器无法访问剪贴板",
+  "GITHUB_STATUS": "Coming soon"
 }
