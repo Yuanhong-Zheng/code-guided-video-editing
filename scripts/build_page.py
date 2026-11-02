@@ -71,7 +71,26 @@ def language_switch(lang, ui):
     return f'<div class="language-switch" role="group" aria-label="{text(ui, "LANGUAGE_LABEL")}">{"".join(links)}</div>'
 
 
-def edition(content, media, ui, lang, output):
+def benchmark_table(benchmark, ui):
+    def row(label, count, before, after, primary=False, footer=False, category=None):
+        baseline, guided = round(before, 2), round(after, 2)
+        delta = round(guided - baseline, 2)
+        change = f'{delta:+.2f}' if delta else '0.00'
+        trend = 'positive' if delta > 0 else 'negative' if delta < 0 else 'neutral'
+        badge = f' <span class="metric-badge">{text(ui, "BENCHMARK_PRIMARY_BADGE")}</span>' if primary else ''
+        klass = 'primary-row' if primary else 'secondary-row' if footer else ''
+        attr = f' data-category="{category}"' if category else ''
+        return f'<tr class="{klass}"{attr}><th scope="row">{escape(label)}{badge}</th><td>{count}</td><td data-arm="baseline">{baseline:.2f}</td><td data-arm="proxy">{guided:.2f}</td><td class="delta {trend}">{change}</td></tr>'
+    rows = [row(ui['TASK_' + r['id'].upper()], r['n'], r['without_proxy'], r['with_proxy'], category=r['id']) for r in benchmark['categories']]
+    foot = []
+    for metric, label, primary in [('macro', 'BENCHMARK_MACRO', True), ('micro', 'BENCHMARK_MICRO', False)]:
+        means = benchmark[metric]
+        foot.append(row(ui[label], benchmark['evaluated_pairs'], means['without_proxy'], means['with_proxy'], primary=primary, footer=True))
+    headers = ''.join(f'<th scope="col">{text(ui, key)}</th>' for key in ['BENCHMARK_TASK','BENCHMARK_N','BENCHMARK_WITHOUT','BENCHMARK_WITH','BENCHMARK_DELTA'])
+    return f'<table class="benchmark-table" aria-describedby="benchmark-protocol"><caption>{text(ui, "BENCHMARK_TABLE_CAPTION")}</caption><thead><tr>{headers}</tr></thead><tbody>{"".join(rows)}</tbody><tfoot>{"".join(foot)}</tfoot></table>'
+
+
+def edition(content, media, benchmark, ui, lang, output):
     sections = []
     for i, category in enumerate(content['categories'], 1):
         cards = '\n'.join(card(case, media['cases'][case['id']], ui) for case in category['cases'])
@@ -96,6 +115,12 @@ def edition(content, media, ui, lang, output):
         'CASE_COUNT': str(case_count),
         'SHOWCASES': '\n'.join(sections),
         'LANGUAGE_SWITCH': language_switch(lang, ui),
+        'BENCHMARK_TABLE': benchmark_table(benchmark, ui),
+        'BENCHMARK_BASELINE': f'{benchmark["macro"]["without_proxy"]:.2f}',
+        'BENCHMARK_GUIDED': f'{benchmark["macro"]["with_proxy"]:.2f}',
+        'BENCHMARK_GAIN_VALUE': f'{round(benchmark["macro"]["with_proxy"], 2) - round(benchmark["macro"]["without_proxy"], 2):+.2f}',
+        'BENCHMARK_PAIR_COUNT': str(benchmark['evaluated_pairs']),
+        'BENCHMARK_REPEAT_COUNT': str(benchmark['repeats_per_video']),
         'RUNTIME_COPY': json.dumps({
             'play': ui['PLAY'], 'pause': ui['PAUSE'],
             'playAll': ui['PLAY_ALL'], 'pauseAll': ui['PAUSE_ALL'],
@@ -104,7 +129,7 @@ def edition(content, media, ui, lang, output):
             'clipboardError': ui['CLIPBOARD_ERROR'],
         }, ensure_ascii=False).replace('<', '\\u003c'),
     })
-    raw = {'SHOWCASES', 'LANGUAGE_SWITCH', 'RUNTIME_COPY'}
+    raw = {'SHOWCASES', 'LANGUAGE_SWITCH', 'RUNTIME_COPY', 'BENCHMARK_TABLE'}
     def replace(match):
         key = match.group(1)
         value = values[key]
@@ -115,6 +140,7 @@ def edition(content, media, ui, lang, output):
     for name, attribute in [
         ('assets/paper.pdf', 'href'), ('assets/method-overview.pdf', 'href'),
         ('assets/method-overview.webp', 'src'), ('styles.css', 'href'), ('app.js', 'src'),
+        ('assets/project-logo.svg', 'src'), ('assets/favicon.svg', 'href'),
     ]:
         version = sha256((DIST / name).read_bytes()).hexdigest()[:12]
         html = html.replace(f'{attribute}="{name}"', f'{attribute}="{name}?v={version}"')
@@ -124,12 +150,14 @@ def edition(content, media, ui, lang, output):
 
 def main():
     media = json.loads((DIST / 'data/media.json').read_text())
+    benchmark = json.loads((ROOT / 'benchmark.json').read_text())
+    (DIST / 'data/benchmark.json').write_text(json.dumps(benchmark, ensure_ascii=False, indent=2) + '\n')
     contents = [json.loads((ROOT / name).read_text()) for name in ['content.json', 'content.zh.json']]
     selection = lambda c: [(g['id'], [x['id'] for x in g['cases']]) for g in c['categories']]
     assert selection(contents[0]) == selection(contents[1]), 'Language editions must show the same selected cases'
     for content, code, lang, output in zip(contents, ['en', 'zh'], ['en', 'zh-CN'], ['index.html', 'zh.html']):
         ui = json.loads((ROOT / 'locales' / f'{code}.json').read_text())
-        edition(content, media, ui, lang, output)
+        edition(content, media, benchmark, ui, lang, output)
 
 
 if __name__ == '__main__':

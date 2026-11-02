@@ -1,0 +1,87 @@
+{
+  "model": "google/gemini-3.1-pro-preview",
+  "temperature": 0.7,
+  "repeats_per_video": 3,
+  "evaluated_pairs": 365,
+  "official_cases": 431,
+  "excluded_counts": {
+    "moderation_skipped": 14,
+    "unresolved_proxy_generation_or_validation": 52
+  },
+  "primary_metric": "category_equal_macro_average",
+  "categories": [
+    {
+      "id": "global_style",
+      "label": "Global style",
+      "n": 55,
+      "without_proxy": 2.4284242424242426,
+      "with_proxy": 2.3798181818181816
+    },
+    {
+      "id": "local_change",
+      "label": "Local change",
+      "n": 57,
+      "without_proxy": 3.3924561403508773,
+      "with_proxy": 3.3881871345029237
+    },
+    {
+      "id": "background_change",
+      "label": "Background change",
+      "n": 46,
+      "without_proxy": 2.388840579710145,
+      "with_proxy": 2.422608695652174
+    },
+    {
+      "id": "local_remove",
+      "label": "Object removal",
+      "n": 49,
+      "without_proxy": 2.3983673469387754,
+      "with_proxy": 2.056394557823129
+    },
+    {
+      "id": "local_add",
+      "label": "Object addition",
+      "n": 60,
+      "without_proxy": 2.403388888888889,
+      "with_proxy": 2.6843333333333335
+    },
+    {
+      "id": "creative_edit",
+      "label": "Creative edit",
+      "n": 26,
+      "without_proxy": 3.469102564102564,
+      "with_proxy": 3.327820512820513
+    },
+    {
+      "id": "camera_edit",
+      "label": "Camera edit",
+      "n": 39,
+      "without_proxy": 2.4415384615384617,
+      "with_proxy": 2.888888888888889
+    },
+    {
+      "id": "subtitle_edit",
+      "label": "Text and subtitles",
+      "n": 33,
+      "without_proxy": 2.9973737373737372,
+      "with_proxy": 3.563131313131313
+    }
+  ],
+  "macro": {
+    "without_proxy": 2.7399364951659617,
+    "with_proxy": 2.8388978272463072
+  },
+  "micro": {
+    "without_proxy": 2.6928036529680366,
+    "with_proxy": 2.778228310502283
+  },
+  "valid_responses": 2190,
+  "source_evidence_sha256": "29d929c9918b9707174c673601ca4487c54f0a82fa6e76dc6481c609ddfc9556",
+  "generation": {
+    "source_steps": 20,
+    "proxy_steps": 5,
+    "seed": 42,
+    "steps": 20,
+    "training_free": true
+  }
+}
