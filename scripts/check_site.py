@@ -91,6 +91,7 @@ def main():
     require(benchmark['primary_metric'] == 'category_equal_macro_average', 'Wrong primary metric')
     require(round(benchmark['macro']['without_proxy'], 2) == 2.74 and round(benchmark['macro']['with_proxy'], 2) == 2.84, 'Wrong primary scores')
     for document in [source, chinese_source]:
+        require('Sample micro' not in document and '样本微平均' not in document and 'secondary-row' not in document, 'Only category macro should be displayed as the aggregate')
         require(document.index('id="benchmark"') > max(document.index(f'id="{c["id"]}"') for c in categories), 'Benchmark must follow all showcases')
         require(document.index('id="benchmark"') < document.index('class="citation-section'), 'Benchmark must precede citation')
         require('Gemini 2.5' not in document and 'gemini-2.5' not in document, 'Only Gemini 3.1 results should be displayed')

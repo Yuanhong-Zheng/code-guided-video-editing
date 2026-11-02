@@ -72,22 +72,20 @@ def language_switch(lang, ui):
 
 
 def benchmark_table(benchmark, ui):
-    def row(label, count, before, after, primary=False, footer=False, category=None):
+    def row(label, count, before, after, primary=False, category=None):
         baseline, guided = round(before, 2), round(after, 2)
         delta = round(guided - baseline, 2)
         change = f'{delta:+.2f}' if delta else '0.00'
         trend = 'positive' if delta > 0 else 'negative' if delta < 0 else 'neutral'
         badge = f' <span class="metric-badge">{text(ui, "BENCHMARK_PRIMARY_BADGE")}</span>' if primary else ''
-        klass = 'primary-row' if primary else 'secondary-row' if footer else ''
+        klass = 'primary-row' if primary else ''
         attr = f' data-category="{category}"' if category else ''
         return f'<tr class="{klass}"{attr}><th scope="row">{escape(label)}{badge}</th><td>{count}</td><td data-arm="baseline">{baseline:.2f}</td><td data-arm="proxy">{guided:.2f}</td><td class="delta {trend}">{change}</td></tr>'
     rows = [row(ui['TASK_' + r['id'].upper()], r['n'], r['without_proxy'], r['with_proxy'], category=r['id']) for r in benchmark['categories']]
-    foot = []
-    for metric, label, primary in [('macro', 'BENCHMARK_MACRO', True), ('micro', 'BENCHMARK_MICRO', False)]:
-        means = benchmark[metric]
-        foot.append(row(ui[label], benchmark['evaluated_pairs'], means['without_proxy'], means['with_proxy'], primary=primary, footer=True))
+    means = benchmark['macro']
+    foot = row(ui['BENCHMARK_MACRO'], benchmark['evaluated_pairs'], means['without_proxy'], means['with_proxy'], primary=True)
     headers = ''.join(f'<th scope="col">{text(ui, key)}</th>' for key in ['BENCHMARK_TASK','BENCHMARK_N','BENCHMARK_WITHOUT','BENCHMARK_WITH','BENCHMARK_DELTA'])
-    return f'<table class="benchmark-table" aria-describedby="benchmark-protocol"><caption>{text(ui, "BENCHMARK_TABLE_CAPTION")}</caption><thead><tr>{headers}</tr></thead><tbody>{"".join(rows)}</tbody><tfoot>{"".join(foot)}</tfoot></table>'
+    return f'<table class="benchmark-table" aria-describedby="benchmark-protocol"><caption>{text(ui, "BENCHMARK_TABLE_CAPTION")}</caption><thead><tr>{headers}</tr></thead><tbody>{"".join(rows)}</tbody><tfoot>{foot}</tfoot></table>'
 
 
 def edition(content, media, benchmark, ui, lang, output):
