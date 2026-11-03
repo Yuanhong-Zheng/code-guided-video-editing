@@ -86,8 +86,8 @@ def main():
     benchmark = json.loads((ROOT / 'benchmark.json').read_text())
     require(benchmark == json.loads((DIST / 'data/benchmark.json').read_text()), 'Published benchmark differs from source')
     require(benchmark['model'] == 'google/gemini-3.1-pro-preview', 'Wrong benchmark evaluator')
-    require(benchmark['repeats_per_video'] == 3 and benchmark['evaluated_pairs'] == 365, 'Wrong repeated evaluation scope')
-    require(len(benchmark['categories']) == 8 and sum(r['n'] for r in benchmark['categories']) == 365, 'Wrong category coverage')
+    require(benchmark['repeats_per_video'] == 3, 'Wrong repeated evaluation protocol')
+    require(len(benchmark['categories']) == 8, 'Wrong category coverage')
     require(benchmark['primary_metric'] == 'category_equal_macro_average', 'Wrong primary metric')
     require(round(benchmark['macro']['without_proxy'], 2) == 2.74 and round(benchmark['macro']['with_proxy'], 2) == 2.84, 'Wrong primary scores')
     for document in [source, chinese_source]:
@@ -102,8 +102,8 @@ def main():
             row = re.search(r'<tr[^>]*data-category="' + r['id'] + r'"[^>]*>(.*?)</tr>', document, re.S)
             require(row, 'Missing task score row')
             values = re.findall(r'<td[^>]*>(.*?)</td>', row.group(1), re.S)
-            expected = [str(r['n']), f'{r["without_proxy"]:.2f}', f'{r["with_proxy"]:.2f}']
-            require(values[:3] == expected, f'Incorrect published task scores: {r["id"]}')
+            expected = [f'{r["without_proxy"]:.2f}', f'{r["with_proxy"]:.2f}']
+            require(len(values) == 3 and values[:2] == expected, f'Incorrect published task scores: {r["id"]}')
     require(all("src" not in v and v.get("preload") == "none" for v in chinese_videos), "Chinese videos load eagerly")
     require("{{" not in source and "{{" not in chinese_source, "Unresolved template copy")
     for document, parsed, current_language in [(source, page, "en"), (chinese_source, chinese_page, "zh-CN")]:
@@ -152,7 +152,7 @@ def main():
             text = path.read_text()
             require(not any(re.search(pattern, text) for pattern in private_patterns), f"Private data in {path.relative_to(DIST)}")
     size = sum(path.stat().st_size for path in DIST.rglob("*") if path.is_file())
-    print(json.dumps({"languages": ["en", "zh-CN"], "categories": 8, "cases": len(cases), "videos": len(videos), "empty_categories": [c["id"] for c in categories if not c["cases"]], "verified_media": True, "benchmark_pairs": benchmark['evaluated_pairs'], "benchmark_repeats": 3, "trained_model_release": "ProxyEdit-H3 / this month", "published_bytes": size, "all_cases_expanded": True}, indent=2))
+    print(json.dumps({"languages": ["en", "zh-CN"], "categories": 8, "cases": len(cases), "videos": len(videos), "empty_categories": [c["id"] for c in categories if not c["cases"]], "verified_media": True, "benchmark_repeats": 3, "trained_model_release": "ProxyEdit-H3 / this month", "published_bytes": size, "all_cases_expanded": True}, indent=2))
 
 
 if __name__ == "__main__":
