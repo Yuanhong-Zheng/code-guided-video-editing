@@ -93,11 +93,7 @@
     <section id="benchmark" class="benchmark-section container" aria-labelledby="benchmark-title">
       <div class="benchmark-intro">
         <div><p class="eyebrow">{{BENCHMARK_EYEBROW}}</p><h2 id="benchmark-title">{{BENCHMARK_TITLE}}</h2><p class="benchmark-description">{{BENCHMARK_DESCRIPTION}}</p></div>
-        <div class="benchmark-summary">
-          <span class="benchmark-metric-label">{{BENCHMARK_PRIMARY}}</span>
-          <div class="benchmark-metric"><span class="benchmark-before">{{BENCHMARK_BASELINE}}</span><span class="benchmark-arrow" aria-hidden="true">→</span><strong>{{BENCHMARK_GUIDED}}</strong><span class="benchmark-gain">{{BENCHMARK_GAIN_VALUE}} {{BENCHMARK_GAIN}}</span></div>
-          <p>{{BENCHMARK_REPEAT_COUNT}} {{BENCHMARK_REPEATS}}</p>
-        </div>
+        <div class="benchmark-highlights" role="list" aria-label="{{BENCHMARK_HIGHLIGHTS_LABEL}}">{{BENCHMARK_HIGHLIGHTS}}</div>
       </div>
       <div class="benchmark-table-wrap">{{BENCHMARK_TABLE}}</div>
       <div class="benchmark-notes" id="benchmark-protocol"><p>{{BENCHMARK_PROTOCOL}}</p><p>{{BENCHMARK_SCOPE}}</p><p>{{BENCHMARK_MODEL}}</p></div>

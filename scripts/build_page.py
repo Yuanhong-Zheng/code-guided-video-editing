@@ -72,20 +72,30 @@ def language_switch(lang, ui):
 
 
 def benchmark_table(benchmark, ui):
-    def row(label, before, after, primary=False, category=None):
+    def row(label, before, after, category):
         baseline, guided = round(before, 2), round(after, 2)
         delta = round(guided - baseline, 2)
         change = f'{delta:+.2f}' if delta else '0.00'
         trend = 'positive' if delta > 0 else 'negative' if delta < 0 else 'neutral'
-        badge = f' <span class="metric-badge">{text(ui, "BENCHMARK_PRIMARY_BADGE")}</span>' if primary else ''
-        klass = 'primary-row' if primary else ''
-        attr = f' data-category="{category}"' if category else ''
-        return f'<tr class="{klass}"{attr}><th scope="row">{escape(label)}{badge}</th><td data-arm="baseline">{baseline:.2f}</td><td data-arm="proxy">{guided:.2f}</td><td class="delta {trend}">{change}</td></tr>'
+        return f'<tr data-category="{category}"><th scope="row">{escape(label)}</th><td data-arm="baseline">{baseline:.2f}</td><td data-arm="proxy">{guided:.2f}</td><td class="delta {trend}">{change}</td></tr>'
     rows = [row(ui['TASK_' + r['id'].upper()], r['without_proxy'], r['with_proxy'], category=r['id']) for r in benchmark['categories']]
-    means = benchmark['macro']
-    foot = row(ui['BENCHMARK_MACRO'], means['without_proxy'], means['with_proxy'], primary=True)
     headers = ''.join(f'<th scope="col">{text(ui, key)}</th>' for key in ['BENCHMARK_TASK','BENCHMARK_WITHOUT','BENCHMARK_WITH','BENCHMARK_DELTA'])
-    return f'<table class="benchmark-table" aria-describedby="benchmark-protocol"><caption>{text(ui, "BENCHMARK_TABLE_CAPTION")}</caption><thead><tr>{headers}</tr></thead><tbody>{"".join(rows)}</tbody><tfoot>{foot}</tfoot></table>'
+    return f'<table class="benchmark-table" aria-describedby="benchmark-protocol"><caption>{text(ui, "BENCHMARK_TABLE_CAPTION")}</caption><thead><tr>{headers}</tr></thead><tbody>{"".join(rows)}</tbody></table>'
+
+
+def benchmark_highlights(benchmark, ui):
+    categories = {r['id']: r for r in benchmark['categories']}
+    cards = []
+    for cid in ['subtitle_edit', 'camera_edit', 'local_add']:
+        row = categories[cid]
+        gain = round(round(row['with_proxy'], 2) - round(row['without_proxy'], 2), 2)
+        assert gain > 0, 'An improvement highlight must have a positive measured change'
+        cards.append(f'''<div class="benchmark-highlight" role="listitem" data-highlight-category="{cid}">
+          <span class="benchmark-highlight-label">{text(ui, 'TASK_' + cid.upper())}</span>
+          <div class="benchmark-highlight-gain"><strong>{gain:+.2f}</strong><span>{text(ui, 'BENCHMARK_GAIN')}</span></div>
+          <span class="benchmark-highlight-note">{text(ui, 'BENCHMARK_HIGHLIGHT_NOTE')}</span>
+        </div>''')
+    return ''.join(cards)
 
 
 def edition(content, media, benchmark, ui, lang, output):
@@ -114,10 +124,7 @@ def edition(content, media, benchmark, ui, lang, output):
         'SHOWCASES': '\n'.join(sections),
         'LANGUAGE_SWITCH': language_switch(lang, ui),
         'BENCHMARK_TABLE': benchmark_table(benchmark, ui),
-        'BENCHMARK_BASELINE': f'{benchmark["macro"]["without_proxy"]:.2f}',
-        'BENCHMARK_GUIDED': f'{benchmark["macro"]["with_proxy"]:.2f}',
-        'BENCHMARK_GAIN_VALUE': f'{round(benchmark["macro"]["with_proxy"], 2) - round(benchmark["macro"]["without_proxy"], 2):+.2f}',
-        'BENCHMARK_REPEAT_COUNT': str(benchmark['repeats_per_video']),
+        'BENCHMARK_HIGHLIGHTS': benchmark_highlights(benchmark, ui),
         'RUNTIME_COPY': json.dumps({
             'play': ui['PLAY'], 'pause': ui['PAUSE'],
             'playAll': ui['PLAY_ALL'], 'pauseAll': ui['PAUSE_ALL'],
@@ -126,7 +133,7 @@ def edition(content, media, benchmark, ui, lang, output):
             'clipboardError': ui['CLIPBOARD_ERROR'],
         }, ensure_ascii=False).replace('<', '\\u003c'),
     })
-    raw = {'SHOWCASES', 'LANGUAGE_SWITCH', 'RUNTIME_COPY', 'BENCHMARK_TABLE'}
+    raw = {'SHOWCASES', 'LANGUAGE_SWITCH', 'RUNTIME_COPY', 'BENCHMARK_TABLE', 'BENCHMARK_HIGHLIGHTS'}
     def replace(match):
         key = match.group(1)
         value = values[key]
